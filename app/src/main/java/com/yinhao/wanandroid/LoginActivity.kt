@@ -9,8 +9,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun initViewModel(): LoginViewModel =
         ViewModelProvider(this).get(LoginViewModel::class.java)
 
-    override fun initViewBinging(inflater: LayoutInflater): ActivityLoginBinding =
-        ActivityLoginBinding.inflate(inflater)
+    override fun initWindowFlag() {
+    }
 
     override fun initEvents() {
     }
@@ -18,7 +18,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun start() {
     }
 
-    override fun initWindowFlag() {
-    }
+    override fun initViewBinging(inflater: LayoutInflater): ActivityLoginBinding =
+        ActivityLoginBinding.inflate(inflater)
+
 
 }

@@ -29,8 +29,8 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
     private var tokenOvertimeAlert: MaterialDialog? = null
     protected val viewModel by lazy { initViewModel() }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         ActivityUtils.getActivityList().add(this)
         setContentView(bindViewBinding(initViewBinging(layoutInflater), this))
         initWindowFlag()
@@ -57,10 +57,11 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
      */
     private fun setupStatusBar() {
         immersionBar {
+            fullScreen(true)
             keyboardEnable(true)
             statusBarDarkFont(barDarkMode)
-            fullScreen(true)
-        }}
+        }
+    }
 
     /**
      * ### 获取本页面对应的ViewModel
