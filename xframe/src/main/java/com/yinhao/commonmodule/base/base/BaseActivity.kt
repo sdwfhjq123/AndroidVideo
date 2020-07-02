@@ -59,6 +59,7 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
         immersionBar {
             keyboardEnable(true)
             statusBarDarkFont(barDarkMode)
+            fullScreen(true)
         }}
 
     /**

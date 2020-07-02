@@ -1,4 +1,4 @@
-package com.yinhao.androidvideo
+package com.yinhao.wanandroid
 
 import org.junit.Test
 

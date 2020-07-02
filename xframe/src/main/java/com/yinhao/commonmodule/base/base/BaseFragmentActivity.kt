@@ -158,13 +158,11 @@ abstract class BaseFragmentActivity<M : BaseViewModel, SM : BaseViewModel, B : V
      * ### 设置statusBar
      */
     private fun setupStatusBar() {
-//        findViewById<View>(R.id.view_XFToolbar_compatTopPadding)?.let {
-//            immersionBar {
-//                statusBarView(it)
-//                keyboardEnable(true)
-//                navigationBarEnable(false)
-//            }
-//        }
+        immersionBar {
+            fullScreen(true)
+            keyboardEnable(true)
+            navigationBarEnable(false)
+        }
     }
 
     /**
