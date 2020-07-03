@@ -22,7 +22,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

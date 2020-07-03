@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:hint="@string/hint_password"
+            android:hint="@string/hint_username"
             android:inputType="none"
             android:maxLength="10"
             android:singleLine="true"
@@ -42,18 +42,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/xf_px_30"
         android:layout_marginTop="@dimen/xf_px_20"
-        android:layout_marginEnd="@dimen/xf_px_30">
+        android:layout_marginEnd="@dimen/xf_px_30"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:hint="@string/hint_username"
+            android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:singleLine="true"
             android:textSize="@dimen/xf_px_26"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xf_px_100"
+        android:layout_marginStart="@dimen/xf_px_50"
+        android:layout_marginTop="@dimen/xf_px_70"
+        android:layout_marginEnd="@dimen/xf_px_50"
+        android:enabled="false"
+        android:text="@string/btn_login" />
 
 </LinearLayout>
