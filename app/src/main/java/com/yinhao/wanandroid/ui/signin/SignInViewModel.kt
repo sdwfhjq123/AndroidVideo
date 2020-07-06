@@ -2,9 +2,7 @@ package com.yinhao.wanandroid.ui.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.UserInfo
 
 /**
  * author:  yinhao

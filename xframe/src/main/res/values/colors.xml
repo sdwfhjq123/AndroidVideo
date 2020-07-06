@@ -5,4 +5,8 @@
 
     <color name="xf_tb_defaultRootColor">#00000000</color>
     <color name="xf_tb_defaultTitleColor">#FFFFFF</color>
+
+    <color name="xf_colorPrimary">#6200EE</color>
+    <color name="xf_colorPrimaryDark">#3700B3</color>
+    <color name="xf_colorAccent">#03DAC5</color>
 </resources>

@@ -27,7 +27,7 @@ import team.fcma.xframe.others.XFrameCommonMethods
  * ### description: 基础FragmentActivity
  */
 abstract class BaseFragmentActivity<M : BaseViewModel, SM : BaseViewModel, B : ViewBinding>
-    : AppCompatActivity(), ViewBindingHolderInterface<B> by ViewBindingHolder<B>() {
+    : AppCompatActivity(), ViewBindingProxy<B> by ViewBindingDelegate<B>() {
 
     private var waitingView: KProgressHUD? = null
     private var noNetworkAlert: MaterialDialog? = null

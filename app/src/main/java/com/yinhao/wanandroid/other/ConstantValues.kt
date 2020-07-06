@@ -1,4 +1,4 @@
-package com.yinhao.wanandroid
+package com.yinhao.wanandroid.other
 
 /**
  * author:  SHIGUANG
@@ -6,10 +6,11 @@ package com.yinhao.wanandroid
  * version: v1.0
  * ### description: 静态常量存放处
  */
+
 class ConstantValues {
     companion object {
         const val DEBUG = true
-        const val BASE_URL = ""
         const val PREF_USER_RECORD = "PREF_USER_RECORD"
+        const val BASE_URL = "https://www.wanandroid.com/"
     }
 }

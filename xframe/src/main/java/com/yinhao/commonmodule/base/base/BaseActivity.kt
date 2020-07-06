@@ -1,9 +1,7 @@
 package com.yinhao.commonmodule.base.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
@@ -20,7 +18,7 @@ import com.yinhao.commonmodule.R
  */
 
 abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
-    : AppCompatActivity(), ViewBindingHolderInterface<B> by ViewBindingHolder<B>() {
+    : AppCompatActivity(), ViewBindingProxy<B> by ViewBindingDelegate<B>() {
 
     open var barDarkMode = false
     private var waitingView: KProgressHUD? = null
@@ -57,7 +55,6 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
      */
     private fun setupStatusBar() {
         immersionBar {
-            fullScreen(true)
             keyboardEnable(true)
             statusBarDarkFont(barDarkMode)
         }

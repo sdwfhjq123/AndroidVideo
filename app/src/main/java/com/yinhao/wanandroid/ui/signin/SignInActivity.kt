@@ -1,12 +1,16 @@
 package com.yinhao.wanandroid.ui.signin
 
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivitySignInBinding
+import com.yinhao.wanandroid.ui.signon.SignOnActivity
+import kotlinx.android.synthetic.main.activity_sign_in.*
+import org.jetbrains.anko.startActivity
 import team.fcma.xframe.ex.click
 
 class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
@@ -15,6 +19,10 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
         ViewModelProvider(this).get(SignInViewModel::class.java)
 
     override fun initWindowFlag() {
+        immersionBar {
+            fullScreen(true)
+        }
+        ImmersionBar.setStatusBarView(this, viewBinding?.viewImmersionbar)
     }
 
     override fun initEvents() {
@@ -39,7 +47,9 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
 
         }
 
-        viewBinding?.etUser?.setText("1111111111")
+        tv_sign_on.click {
+            startActivity<SignOnActivity>()
+        }
     }
 
     override fun start() {

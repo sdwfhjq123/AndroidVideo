@@ -15,7 +15,7 @@ import androidx.viewbinding.ViewBinding
  * ### description:ViewBinding代理，用以处理生命周期
  */
 
-class ViewBindingHolder<B : ViewBinding> : ViewBindingHolderInterface<B>, LifecycleObserver {
+class ViewBindingDelegate<B : ViewBinding> : ViewBindingProxy<B>, LifecycleObserver {
     override var viewBinding: B? = null
     private lateinit var owner: String
     private var lifecycle: Lifecycle? = null
@@ -48,7 +48,7 @@ class ViewBindingHolder<B : ViewBinding> : ViewBindingHolderInterface<B>, Lifecy
     }
 }
 
-interface ViewBindingHolderInterface<B : ViewBinding> {
+interface ViewBindingProxy<B : ViewBinding> {
     val viewBinding: B?
 
     /**

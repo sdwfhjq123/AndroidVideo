@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yinhao.commonmodule.R
 
 /**
  * author:      SHIGUANG
@@ -18,7 +16,7 @@ import com.yinhao.commonmodule.R
  * ### description: 基础Fragment
  */
 abstract class BaseFragment<M : BaseViewModel, SM : BaseViewModel, B : ViewBinding>
-    : Fragment(), ViewBindingHolderInterface<B> by ViewBindingHolder<B>() {
+    : Fragment(), ViewBindingProxy<B> by ViewBindingDelegate<B>() {
 
     open var barDarkMode = false
     protected val viewModel: M by lazy { initViewModel() }
