@@ -34,7 +34,7 @@ class XFConstants {
         const val ERROR_CODE_CONNECTINTERRUPT = 1304
 
         //约定特殊码
-        const val PACT_CODE_NORMAL = 200
+        const val PACT_CODE_NORMAL = 0
         const val PACT_CODE_MISSING = 404
         const val PACT_CODE_FORBIDDEN = 403
         const val PACT_CODE_TOKENOVERTIME = 202

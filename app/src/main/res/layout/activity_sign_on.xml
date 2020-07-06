@@ -83,13 +83,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_sign_on"
         android:layout_width="match_parent"
         android:layout_height="@dimen/xf_px_100"
         android:layout_marginStart="@dimen/xf_px_50"
         android:layout_marginTop="@dimen/xf_px_70"
         android:layout_marginEnd="@dimen/xf_px_50"
-        android:enabled="false"
         android:text="@string/btn_register" />
 
 </LinearLayout>

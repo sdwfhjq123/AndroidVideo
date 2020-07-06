@@ -1,5 +1,7 @@
 package com.yinhao.wanandroid.logic.network.api
 
+import com.yinhao.commonmodule.base.repository.RepositoryResult
+import com.yinhao.wanandroid.logic.model.SignOnEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -21,5 +23,6 @@ interface UserService {
         @Field("username") signName: String,
         @Field("password") password: String,
         @Field("repassword") repassword: String
-    )
+    ):RepositoryResult<SignOnEntity>
+
 }

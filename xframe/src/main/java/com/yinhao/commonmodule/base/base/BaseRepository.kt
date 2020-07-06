@@ -28,10 +28,10 @@ open class BaseRepository {
     protected fun <T : Any> T.toResult(
         success: Boolean = true, statusCode: Int = XFConstants.PACT_CODE_NORMAL, message: String = ""
     ): RepositoryResult<T> {
-        val result: RepositoryResult<T> = RepositoryResult(success)
+        val result: RepositoryResult<T> =RepositoryResult("",0)
         result.data = this
-        result.message = message
-        result.statusCode = statusCode
+        result.errorMsg = message
+        result.errorCode = statusCode
         return result
     }
 
@@ -42,14 +42,14 @@ open class BaseRepository {
     protected fun <T : Any?> T.toResultWithNullCheck(
         success: Boolean = true, statusCode: Int = XFConstants.PACT_CODE_NORMAL, message: String = ""
     ): RepositoryResult<T> {
-        val result: RepositoryResult<T> = RepositoryResult(success)
+        val result: RepositoryResult<T> = RepositoryResult("",0)
         result.data = this
         if (this != null && success) {
-            result.message = message
-            result.statusCode = statusCode
+            result.errorMsg = message
+            result.errorCode = statusCode
         } else {
-            result.message = "data is null."
-            result.statusCode = XFConstants.ERROR_CODE_NULLDATA
+            result.errorMsg = "data is null."
+            result.errorCode = XFConstants.ERROR_CODE_NULLDATA
         }
         return result
     }
@@ -62,10 +62,10 @@ open class BaseRepository {
     ): LiveDataWrapper<T> {
         return try {
             val repositoryResult = request.invoke()
-            if (repositoryResult.success && repositoryResult.statusCode == XFConstants.PACT_CODE_NORMAL) {
+            if (repositoryResult.errorCode == XFConstants.PACT_CODE_NORMAL) {
                 LiveDataWrapper(repositoryResult.data)
             } else {
-                LiveDataWrapper(handleErrorCode(repositoryResult.statusCode, repositoryResult.message))
+                LiveDataWrapper(handleErrorCode(repositoryResult.errorCode, repositoryResult.errorMsg))
             }
         } catch (e: Exception) {
             LiveDataWrapper(handlerUnknownError(e))
@@ -81,10 +81,10 @@ open class BaseRepository {
     ): RNLDataWrapper<T> {
         return try {
             val repositoryResult = request.invoke()
-            if (repositoryResult.success && repositoryResult.statusCode == XFConstants.PACT_CODE_NORMAL) {
+            if (repositoryResult.errorCode == XFConstants.PACT_CODE_NORMAL) {
                 RNLDataWrapper(repositoryResult.data, operation, requestPage, originalPage)
             } else {
-                RNLDataWrapper(handleErrorCode(repositoryResult.statusCode, repositoryResult.message), operation, requestPage, originalPage)
+                RNLDataWrapper(handleErrorCode(repositoryResult.errorCode, repositoryResult.errorMsg), operation, requestPage, originalPage)
             }
         } catch (e: Exception) {
             RNLDataWrapper(handlerUnknownError(e), operation, requestPage, originalPage)
