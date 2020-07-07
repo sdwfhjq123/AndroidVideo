@@ -22,7 +22,14 @@ object UserRepository : BaseRepository() {
     ): Result<SignOnEntity> {
         return safeApiCall(
             call = { requestSignOn(username, password, repeatPwd) },
-            errorMessage = "网络请求错误"
+            errorMessage = "注册失败"
+        )
+    }
+
+    suspend fun signIn(username: String, password: String): Result<SignOnEntity> {
+        return safeApiCall(
+            call = { requestSignIn(username, password) },
+            errorMessage = "登录失败"
         )
     }
 
@@ -38,7 +45,8 @@ object UserRepository : BaseRepository() {
     private suspend fun requestSignIn(
         username: String,
         password: String
-    ) {
-//        val response= userService.sign
+    ): Result<SignOnEntity> {
+        val response = userService.signIn(username, password)
+        return executeResponse(response)
     }
 }

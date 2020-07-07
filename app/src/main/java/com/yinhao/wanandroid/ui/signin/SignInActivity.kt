@@ -1,5 +1,7 @@
 package com.yinhao.wanandroid.ui.signin
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +46,10 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
                     viewModel.username.value?.isNotEmpty() ?: false
         }
         viewBinding?.btnSignIn?.click {
+            viewModel.signIn()
+        }
+
+        viewModel.signData.observe(this){
 
         }
 

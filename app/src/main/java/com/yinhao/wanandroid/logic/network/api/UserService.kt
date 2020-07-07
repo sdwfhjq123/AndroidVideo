@@ -30,6 +30,6 @@ interface UserService {
     suspend fun signIn(
         @Field("username") signName: String,
         @Field("password") password: String
-    ): WanResponse<Any>
+    ): WanResponse<SignOnEntity>
 
 }
