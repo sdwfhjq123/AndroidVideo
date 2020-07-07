@@ -3,12 +3,10 @@ package com.yinhao.commonmodule.base.ex
 import androidx.lifecycle.*
 import com.yinhao.commonmodule.base.base.AppResources
 import com.yinhao.commonmodule.base.others.XFConstants
-import com.yinhao.commonmodule.base.repository.livedata.LiveDataWrapper
 import com.yinhao.commonmodule.base.repository.livedata.holder.StateHolder
 import com.yinhao.commonmodule.base.repository.livedata.holder.WaitingHolder
 import com.yinhao.commonmodule.base.widget.state.SLState
 import com.yinhao.commonmodule.R
-import com.yinhao.commonmodule.base.repository.livedata.RNLDataWrapper
 
 /**
  * ### State LiveData的post简写
@@ -93,43 +91,6 @@ inline fun LiveData<StateHolder>.stateObserve(
         SLState.NO_NETWORK -> showNoNetwork(it.message)
         SLState.NOT_SIGNED -> showNotSigned(it.message)
         SLState.TOKEN_OVERTIME -> showTokenOverTime(it.message)
-    }
-})
-
-/**
- * ### Repository的LiveData的observe简化。
- * [owner]为拥有者，[onSuccess]和[onFailed]中分别处理操作成功和失败的逻辑。
- */
-inline fun <T : Any> LiveData<LiveDataWrapper<T>>.doObserve(
-    owner: LifecycleOwner,
-    crossinline onSuccess: (data: T?) -> Unit = {},
-    crossinline onFailed: (code: Int, message: String) -> Unit = { _, _ -> }
-) = observe(owner, Observer<LiveDataWrapper<T>> {
-    if (it.success) onSuccess(it.data)
-    else onFailed(
-        it.error?.errorCode ?: XFConstants.ERROR_CODE_UNKNOWN,
-        it.error?.errorMessage ?: AppResources.getString(R.string.errorStr_unknown)
-    )
-})
-
-/**
- * ### Repository的RNL型LiveData的observe简化。
- * [owner]为拥有者，[onSuccess]和[onFailed]中分别处理操作成功和失败的逻辑,
- * 并在[onRestore]中进行状态恢复。
- */
-inline fun <T : Any> LiveData<RNLDataWrapper<T>>.doObserve(
-    owner: LifecycleOwner,
-    crossinline onSuccess: (data: T?) -> Unit = {},
-    crossinline onFailed: (code: Int, message: String) -> Unit = { _, _ -> },
-    crossinline onRestore: (operation: Int, requestPage: Int, originalPage: Int) -> Unit = { _, _, _ -> }
-) = observe(owner, Observer<RNLDataWrapper<T>> { wrapper ->
-    if (wrapper.success) onSuccess(wrapper.data)
-    else {
-        onFailed(
-            wrapper.error?.errorCode ?: XFConstants.ERROR_CODE_UNKNOWN,
-            wrapper.error?.errorMessage ?: AppResources.getString(R.string.errorStr_unknown)
-        )
-        onRestore(wrapper.operation, wrapper.requestPage, wrapper.originalPage)
     }
 })
 

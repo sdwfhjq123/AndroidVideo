@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/xf_px_30"
         android:layout_marginTop="@dimen/xf_px_20"
+
         android:layout_marginEnd="@dimen/xf_px_30">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,6 +37,7 @@
             android:inputType="none"
             android:maxLength="10"
             android:singleLine="true"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/xf_px_26"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +59,7 @@
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:singleLine="true"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/xf_px_26"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +81,7 @@
             android:hint="@string/hint_repeat_password"
             android:inputType="textPassword"
             android:singleLine="true"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/xf_px_26"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -89,6 +93,7 @@
         android:layout_marginStart="@dimen/xf_px_50"
         android:layout_marginTop="@dimen/xf_px_70"
         android:layout_marginEnd="@dimen/xf_px_50"
+        android:enabled="false"
         android:text="@string/btn_register" />
 
 </LinearLayout>

@@ -61,6 +61,27 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
     }
 
     /**
+     * ### 获取等待View
+     */
+    protected fun getWaitingView(): KProgressHUD {
+        waitingView?.dismiss()
+        waitingView = waitingView ?: (KProgressHUD.create(this)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(false)
+            .setLabel(getString(R.string.pleaseWaiting))
+            .setAnimationSpeed(2)
+            .setDimAmount(0.5f))
+        return waitingView!!
+    }
+
+    /**
+     * ### 隐藏等待View
+     */
+    protected fun hideWaitingView() {
+        waitingView?.dismiss()
+    }
+
+    /**
      * ### 获取本页面对应的ViewModel
      */
     abstract fun initViewModel(): M

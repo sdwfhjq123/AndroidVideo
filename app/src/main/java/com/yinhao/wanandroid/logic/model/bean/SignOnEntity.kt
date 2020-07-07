@@ -1,4 +1,4 @@
-package com.yinhao.wanandroid.logic.model
+package com.yinhao.wanandroid.logic.model.bean
 
 /**
  * author:  yinhao

@@ -1,12 +1,12 @@
 package com.yinhao.wanandroid.ui.signon
 
-import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.commonmodule.base.repository.RepositoryResult
-import com.yinhao.wanandroid.logic.model.SignOnEntity
+import com.yinhao.wanandroid.logic.model.bean.SignOnEntity
 import com.yinhao.wanandroid.logic.network.repository.UserRepository
+import com.yinhao.wanandroid.other.checkResult
 import kotlinx.coroutines.launch
 
 /**
@@ -16,20 +16,53 @@ import kotlinx.coroutines.launch
  * ### description:
  */
 class SignOnViewModel : BaseViewModel() {
-    val result:LiveData<RepositoryResult<SignOnEntity>>
-        get() {
-            TODO()
-        }
+    private val _signData = MutableLiveData<SignOnUiModel<SignOnEntity>>()
+    val signData: LiveData<SignOnUiModel<SignOnEntity>>
+        get() = _signData
 
-    //TODO 如何解决持有activity的问题 ，观察对象
+    private val _username = MutableLiveData<String>()
+    private val _password = MutableLiveData<String>()
+    private val _repeatPwd = MutableLiveData<String>()
+
+    val username: LiveData<String>
+        get() = _username
+    val password: LiveData<String>
+        get() = _password
+    val repeatPwd: LiveData<String>
+        get() = _repeatPwd
+
+    fun setUserValue(username: String) {
+        _username.value = username
+    }
+
+    fun setPasswordValue(password: String) {
+        _password.value = password
+    }
+
+    fun setRepeatPwdValue(repeatPwd: String) {
+        _repeatPwd.value = repeatPwd
+    }
+
     fun signOn() {
+        //需要转换一下转换成success与failed
+        _signData.value = SignOnUiModel(isLoading = true)
         viewModelScope.launch {
             val result = UserRepository.signOn("sdwfhjq123", "123456Aa", "123456Aa")
-            if (result.errorCode == 0) {
-                Log.e("请求成功", "请求成功")
-            } else {
-                Log.e("请求注册", result.errorMsg)
-            }
+            result.checkResult(
+                onSuccess = {
+                    _signData.value = SignOnUiModel(isSuccess = it, enableSignOnButton = true)
+                },
+                onError = {
+                    _signData.value = SignOnUiModel(isError = it, enableSignOnButton = true)
+                }
+            )
         }
     }
 }
+
+data class SignOnUiModel<T>(
+    val isLoading: Boolean = false,
+    val isSuccess: T? = null,
+    val isError: String? = null,
+    val enableSignOnButton: Boolean = false
+)

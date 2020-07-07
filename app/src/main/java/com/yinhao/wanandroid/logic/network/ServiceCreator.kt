@@ -1,6 +1,10 @@
 package com.yinhao.wanandroid.logic.network
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.yinhao.commonmodule.base.ex.loggerInterceptor
+import com.yinhao.wanandroid.App
 import com.yinhao.wanandroid.other.ConstantValues
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,13 +13,22 @@ import java.util.concurrent.TimeUnit
 
 class ServiceCreator {
 
+    private val cookieJar by lazy {
+        PersistentCookieJar(
+            SetCookieCache(), SharedPrefsCookiePersistor(
+                App.instance
+            )
+        )
+    }
+
     private val httpClient = OkHttpClient.Builder()
         .apply {
-           addInterceptor(loggerInterceptor())
+            addInterceptor(loggerInterceptor())
             readTimeout(10L, TimeUnit.SECONDS)
             writeTimeout(10L, TimeUnit.SECONDS)
             connectTimeout(10L, TimeUnit.SECONDS)
             callTimeout(5, TimeUnit.SECONDS)
+            cookieJar(cookieJar)
         }
         .build()
 

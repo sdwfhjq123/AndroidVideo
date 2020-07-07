@@ -47,12 +47,12 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
 
         }
 
-        tv_sign_on.click {
-            startActivity<SignOnActivity>()
-        }
     }
 
     override fun start() {
+        tv_sign_on.click {
+            startActivity<SignOnActivity>()
+        }
     }
 
     override fun initViewBinging(inflater: LayoutInflater): ActivitySignInBinding =
