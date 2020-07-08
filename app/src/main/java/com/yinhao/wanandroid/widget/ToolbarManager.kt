@@ -42,7 +42,7 @@ interface ToolbarManager {
         toolbar.menu.findItem(redId).isVisible = false
     }
 
-    private fun createUpDrawable(icon: Float = 1f) =
+    private fun createUpDrawable(icon: Float) =
         DrawerArrowDrawable(toolbar.context).apply { progress = icon }
 
 }

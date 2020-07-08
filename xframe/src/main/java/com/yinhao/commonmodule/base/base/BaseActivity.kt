@@ -2,6 +2,7 @@ package com.yinhao.commonmodule.base.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
@@ -9,6 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.yinhao.commonmodule.R
+import org.jetbrains.anko.find
 
 /**
  * author:  yinhao
@@ -54,9 +56,13 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
      * ### 设置statusBar
      */
     private fun setupStatusBar() {
-        immersionBar {
-            keyboardEnable(true)
-            statusBarDarkFont(barDarkMode)
+        find<View>(R.id.view_immersionbar)?.let {
+            immersionBar {
+                fullScreen(true)
+                statusBarView(it)
+                keyboardEnable(true)
+                navigationBarEnable(false)
+            }
         }
     }
 

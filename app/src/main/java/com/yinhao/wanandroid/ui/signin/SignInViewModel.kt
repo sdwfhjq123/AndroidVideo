@@ -1,10 +1,12 @@
 package com.yinhao.wanandroid.ui.signin
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
 import com.yinhao.wanandroid.logic.model.bean.SignOnEntity
+import com.yinhao.wanandroid.logic.network.repository.HomeRepository
 import com.yinhao.wanandroid.logic.network.repository.UserRepository
 import com.yinhao.wanandroid.other.checkResult
 import com.yinhao.wanandroid.ui.signon.SignOnUiModel
@@ -39,6 +41,7 @@ class SignInViewModel : BaseViewModel() {
     }
 
     fun signIn() {
+        _signData.value = SignInUiModel(isLoading = true)
         launchOnUI {
             val result = UserRepository.signIn(_username.value!!, _password.value!!)
             result.checkResult(
@@ -49,6 +52,7 @@ class SignInViewModel : BaseViewModel() {
                     _signData.value = SignInUiModel(isError = it, enableSignInButton = true)
                 }
             )
+
         }
     }
 }

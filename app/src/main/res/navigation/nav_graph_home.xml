@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yinhao.wanandroid.ui.home.home.HomeFragment"
+        android:label="@string/bottom_nav_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/knowledgeFragment"
+        android:name="com.yinhao.wanandroid.ui.home.knowledge.KnowledgeFragment"
+        android:label="@string/bottom_nav_knowledge"
+        tools:layout="@layout/fragment_knowledge" />
+    <fragment
+        android:id="@+id/navFragment"
+        android:name="com.yinhao.wanandroid.ui.home.nav.NavFragment"
+        android:label="@string/bottom_nav_nav"
+        tools:layout="@layout/fragment_nav" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.yinhao.wanandroid.ui.home.project.ProjectFragment"
+        android:label="@string/bottom_nav_project"
+        tools:layout="@layout/fragment_project" />
+</navigation>

@@ -23,10 +23,6 @@ class SignOnActivity : BaseActivity<SignOnViewModel, ActivitySignOnBinding>(), T
         ActivitySignOnBinding.inflate(layoutInflater)
 
     override fun initWindowFlag() {
-        immersionBar {
-            fullScreen(true)
-        }
-        setStatusBarView(this, viewBinding?.viewImmersionbar)
     }
 
     override fun initEvents() {
