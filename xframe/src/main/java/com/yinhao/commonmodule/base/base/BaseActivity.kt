@@ -33,10 +33,9 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
         super.onCreate(savedInstanceState)
         ActivityUtils.getActivityList().add(this)
         setContentView(bindViewBinding(initViewBinging(layoutInflater), this))
-        initWindowFlag()
         setupStatusBar()
-        initEvents()
-        start()
+        initView()
+        initData()
     }
 
     override fun onDestroy() {
@@ -97,19 +96,7 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
      */
     abstract fun initViewBinging(inflater: LayoutInflater): B
 
-    /**
-     *  ### 设置本页面的WindowFlag
-     */
-    abstract fun initWindowFlag()
-
-    /**
-     * ### 初始化事件
-     */
-    abstract fun initEvents()
-
-    /**
-     * ### 开始本页面业务逻辑
-     */
-    abstract fun start()
+    abstract fun initView()
+    abstract fun initData()
 
 }

@@ -22,29 +22,27 @@ class SignOnActivity : BaseActivity<SignOnViewModel, ActivitySignOnBinding>(), T
     override fun initViewBinging(inflater: LayoutInflater): ActivitySignOnBinding =
         ActivitySignOnBinding.inflate(layoutInflater)
 
-    override fun initWindowFlag() {
+    private fun observeBtnIsEnable() {
+        viewBinding?.btnSignOn?.isEnabled = viewModel.username.value?.isNotEmpty() ?: false
+                && viewModel.password.value?.isNotEmpty() ?: false
+                && viewModel.repeatPwd.value?.isNotEmpty() ?: false
     }
 
-    override fun initEvents() {
-
+    override fun initView() {
         viewModel.apply {
             signData.observe(this@SignOnActivity) {
                 it.isLoading.let { getWaitingView().show() }
-
                 it.isSuccess?.let {
                     hideWaitingView()
                     toast("注册成功")
                     finish()
                 }
-
                 it.isError?.let { err ->
                     hideWaitingView()
                     toast(err)
                 }
-
                 viewBinding?.btnSignOn?.isEnabled = it.enableSignOnButton
             }
-
         }
 
         viewBinding?.apply {
@@ -68,16 +66,9 @@ class SignOnActivity : BaseActivity<SignOnViewModel, ActivitySignOnBinding>(), T
                 }
             }
         }
-
     }
 
-    private fun observeBtnIsEnable() {
-        viewBinding?.btnSignOn?.isEnabled = viewModel.username.value?.isNotEmpty() ?: false
-                && viewModel.password.value?.isNotEmpty() ?: false
-                && viewModel.repeatPwd.value?.isNotEmpty() ?: false
-    }
-
-    override fun start() {
+    override fun initData() {
         enableHomeAsUp(1f) {
             finish()
         }

@@ -1,20 +1,37 @@
 package com.yinhao.wanandroid.ui.home
 
 import android.view.LayoutInflater
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityHomeBinding
+import com.yinhao.wanandroid.ui.home.home.HomeFragment
+import com.yinhao.wanandroid.ui.home.knowledge.KnowledgeFragment
+import com.yinhao.wanandroid.ui.home.nav.NavFragment
+import com.yinhao.wanandroid.ui.home.project.ProjectFragment
 import com.yinhao.wanandroid.widget.ToolbarManager
 
-//TODO 考虑是采用github的方式还是简书 https://www.jianshu.com/p/41d0e33bb674
 class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
+
+    private val fragmentList = arrayListOf<Fragment>()
+    private val homeFragment by lazy { HomeFragment() }
+    private val knowledgeFragment by lazy { KnowledgeFragment() }
+    private val navFragment by lazy { NavFragment() }
+    private val projectFragment by lazy { ProjectFragment() }
+
+    init {
+        fragmentList.add(homeFragment)
+        fragmentList.add(knowledgeFragment)
+        fragmentList.add(navFragment)
+        fragmentList.add(projectFragment)
+    }
 
     override fun initViewModel(): HomeViewModel =
         ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -22,38 +39,59 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), Toolbar
     override fun initViewBinging(inflater: LayoutInflater): ActivityHomeBinding =
         ActivityHomeBinding.inflate(inflater)
 
-    override fun initWindowFlag() {
+    override fun initView() {
+        setSupportActionBar(toolbar)
+        enableHomeAsUp(0f) {
+            viewBinding?.drawerLayout?.open()
+        }
+
+        initViewPager()
+        viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
+
+        val toggle = ActionBarDrawerToggle(
+            this, viewBinding?.drawerLayout, toolbar,
+            R.string.app_name, R.string.app_name
+        )
+        toggle.syncState()
+        viewBinding?.drawerLayout?.addDrawerListener(toggle)
     }
 
-    override fun initEvents() {
-        setSupportActionBar(toolbar)
-        enableHomeAsUp(1f) {
-//            viewBinding?.drawerLayout.star
-        }
-        val navController = findNavController(R.id.nav_host_fragment)
+    override fun initData() {
+    }
 
-        val appBarConfiguration =
-            AppBarConfiguration(
-                setOf(R.id.nav_home, R.id.nav_knowledge, R.id.nav_nav, R.id.nav_project),
-                viewBinding?.drawerLayout
-            )
+    private fun initViewPager() {
+        viewBinding?.viewPager?.run {
+            isUserInputEnabled = false
+            offscreenPageLimit = 2
+            adapter = object : FragmentStateAdapter(this@HomeActivity) {
+                override fun createFragment(position: Int) = fragmentList[position]
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        viewBinding?.navView?.apply {
-            setupWithNavController(navController)
-            setOnNavigationItemSelectedListener {
-                when (it.itemId) {
-                    R.id.nav_home -> navController.navigate(R.id.homeFragment)
-                    R.id.nav_knowledge -> navController.navigate(R.id.knowledgeFragment)
-                    R.id.nav_nav -> navController.navigate(R.id.navFragment)
-                    R.id.nav_project -> navController.navigate(R.id.projectFragment)
-                }
-                true
+                override fun getItemCount() = fragmentList.size
             }
         }
     }
 
-    override fun start() {
+    private val onNavigationItemSelected = BottomNavigationView.OnNavigationItemSelectedListener {
+        when (it.itemId) {
+            R.id.nav_home -> {
+                switchFragment(0)
+            }
+            R.id.nav_knowledge -> {
+                switchFragment(1)
+            }
+            R.id.nav_nav -> {
+                switchFragment(2)
+            }
+            R.id.nav_project -> {
+                switchFragment(3)
+            }
+        }
+        true
+    }
+
+    private fun switchFragment(position: Int): Boolean {
+        viewBinding?.viewPager?.setCurrentItem(position, false)
+        return true
     }
 
 }

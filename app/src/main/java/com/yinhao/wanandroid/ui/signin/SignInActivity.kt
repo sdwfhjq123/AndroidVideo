@@ -20,11 +20,7 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
     override fun initViewModel(): SignInViewModel =
         ViewModelProvider(this).get(SignInViewModel::class.java)
 
-    override fun initWindowFlag() {
-    }
-
-    override fun initEvents() {
-
+    override fun initView() {
         viewBinding?.apply {
             etUser.addTextChangedListener {
                 viewModel.setUserValue(it.toString())
@@ -70,7 +66,7 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
         }
     }
 
-    override fun start() {
+    override fun initData() {
         tv_sign_on.click {
             startActivity<SignOnActivity>()
         }
