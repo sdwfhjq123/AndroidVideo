@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.home.HomeActivity"></activity>
 
         <meta-data
             android:name="android.max_aspect"
@@ -31,6 +30,9 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.signin.SignInActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.home.HomeActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

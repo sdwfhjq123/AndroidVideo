@@ -15,12 +15,11 @@ import com.gyf.immersionbar.ktx.immersionBar
  * version:     v1.0
  * ### description: 基础Fragment
  */
-abstract class BaseFragment<M : BaseViewModel, SM : BaseViewModel, B : ViewBinding>
+abstract class BaseFragment<M : BaseViewModel, B : ViewBinding>
     : Fragment(), ViewBindingProxy<B> by ViewBindingDelegate<B>() {
 
     open var barDarkMode = false
     protected val viewModel: M by lazy { initViewModel() }
-    protected val sharedViewModel: SM by lazy { initSharedViewModel() }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -28,17 +27,13 @@ abstract class BaseFragment<M : BaseViewModel, SM : BaseViewModel, B : ViewBindi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initWindowFlag()
-//        view.findViewById<View>(R.id.view_XFToolbar_compatTopPadding)?.let {
-//            ImmersionBar.setStatusBarView(this, it)
-//        }
+        initView()
+        initData()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initEvents()
         setupStatusBar()
-        start()
     }
 
     /**
@@ -54,10 +49,10 @@ abstract class BaseFragment<M : BaseViewModel, SM : BaseViewModel, B : ViewBindi
     /**
      * ### 建立共享ViewModel
      */
-    protected fun setupSharedViewModel(block: (hostActivity: FragmentActivity) -> SM): SM {
-        return activity?.run { block.invoke(this) }
-            ?: throw IllegalStateException("未能找到对应的Activity：" + this@BaseFragment::class.simpleName)
-    }
+//    protected fun setupSharedViewModel(block: (hostActivity: FragmentActivity) -> SM): SM {
+//        return activity?.run { block.invoke(this) }
+//            ?: throw IllegalStateException("未能找到对应的Activity：" + this@BaseFragment::class.simpleName)
+//    }
 
     /**
      * ### 获取本页面对应的ViewModel
@@ -67,25 +62,15 @@ abstract class BaseFragment<M : BaseViewModel, SM : BaseViewModel, B : ViewBindi
     /**
      * ### 获取本页面对应的共享ViewModel
      */
-    abstract fun initSharedViewModel(): SM
+//    abstract fun initSharedViewModel(): SM
 
     /**
      * ### 获取本页面对应的ViewBinding
      */
     abstract fun initViewBinding(inflater: LayoutInflater, container: ViewGroup?): B
 
-    /**
-     *  ### 设置本页面的WindowFlag
-     */
-    abstract fun initWindowFlag()
+    abstract fun initView()
 
-    /**
-     * ### 初始化事件
-     */
-    abstract fun initEvents()
+    abstract fun initData()
 
-    /**
-     * ### 开始本页面业务逻辑
-     */
-    abstract fun start()
 }

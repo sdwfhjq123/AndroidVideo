@@ -1,7 +1,7 @@
 package com.yinhao.wanandroid.logic.network.repository
 
 import com.yinhao.wanandroid.logic.model.Result
-import com.yinhao.wanandroid.logic.model.bean.SignOnEntity
+import com.yinhao.wanandroid.logic.model.bean.SignOnBean
 import com.yinhao.wanandroid.logic.network.BaseRepository
 import com.yinhao.wanandroid.logic.network.ServiceCreator
 import com.yinhao.wanandroid.logic.network.api.UserService
@@ -19,14 +19,14 @@ object UserRepository : BaseRepository() {
         username: String,
         password: String,
         repeatPwd: String
-    ): Result<SignOnEntity> {
+    ): Result<SignOnBean> {
         return safeApiCall(
             call = { requestSignOn(username, password, repeatPwd) },
             errorMessage = "注册失败"
         )
     }
 
-    suspend fun signIn(username: String, password: String): Result<SignOnEntity> {
+    suspend fun signIn(username: String, password: String): Result<SignOnBean> {
         return safeApiCall(
             call = { requestSignIn(username, password) },
             errorMessage = "登录失败"
@@ -37,7 +37,7 @@ object UserRepository : BaseRepository() {
         username: String,
         password: String,
         repeatPwd: String
-    ): Result<SignOnEntity> {
+    ): Result<SignOnBean> {
         val response = userService.signOn(username, password, repeatPwd)
         return executeResponse(response)
     }
@@ -45,7 +45,7 @@ object UserRepository : BaseRepository() {
     private suspend fun requestSignIn(
         username: String,
         password: String
-    ): Result<SignOnEntity> {
+    ): Result<SignOnBean> {
         val response = userService.signIn(username, password)
         return executeResponse(response)
     }

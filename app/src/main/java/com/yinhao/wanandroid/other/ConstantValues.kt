@@ -12,5 +12,8 @@ class ConstantValues {
         const val DEBUG = true
         const val PREF_USER_RECORD = "PREF_USER_RECORD"
         const val BASE_URL = "https://www.wanandroid.com/"
+
+        const val SP_NAME = "sp_wan_android"
+        const val SP_KEY_USERNAME = "sp_key_username"
     }
 }

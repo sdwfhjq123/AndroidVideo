@@ -1,7 +1,7 @@
 package com.yinhao.wanandroid.logic.network.api
 
 import com.yinhao.wanandroid.logic.model.WanResponse
-import com.yinhao.wanandroid.logic.model.bean.SignOnEntity
+import com.yinhao.wanandroid.logic.model.bean.SignOnBean
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -23,13 +23,13 @@ interface UserService {
         @Field("username") signName: String,
         @Field("password") password: String,
         @Field("repassword") repassword: String
-    ): WanResponse<SignOnEntity>
+    ): WanResponse<SignOnBean>
 
     @FormUrlEncoded
     @POST("user/login")
     suspend fun signIn(
         @Field("username") signName: String,
         @Field("password") password: String
-    ): WanResponse<SignOnEntity>
+    ): WanResponse<SignOnBean>
 
 }

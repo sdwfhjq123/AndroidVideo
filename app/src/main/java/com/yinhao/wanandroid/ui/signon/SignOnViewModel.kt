@@ -1,11 +1,10 @@
 package com.yinhao.wanandroid.ui.signon
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.bean.SignOnEntity
+import com.yinhao.wanandroid.logic.model.bean.SignOnBean
 import com.yinhao.wanandroid.logic.network.repository.UserRepository
 import com.yinhao.wanandroid.other.checkResult
 import kotlinx.coroutines.launch
@@ -17,8 +16,8 @@ import kotlinx.coroutines.launch
  * ### description:
  */
 class SignOnViewModel : BaseViewModel() {
-    private val _signData = MutableLiveData<SignOnUiModel<SignOnEntity>>()
-    val signData: LiveData<SignOnUiModel<SignOnEntity>>
+    private val _signData = MutableLiveData<SignOnUiModel<SignOnBean>>()
+    val signData: LiveData<SignOnUiModel<SignOnBean>>
         get() = _signData
 
     private val _username = MutableLiveData<String>()

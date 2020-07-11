@@ -1,6 +1,7 @@
 package com.yinhao.wanandroid.logic.network.api
 
 import com.yinhao.wanandroid.logic.model.WanResponse
+import com.yinhao.wanandroid.logic.model.bean.BannerBean
 import retrofit2.http.GET
 
 /**
@@ -10,11 +11,10 @@ import retrofit2.http.GET
  * ### description:
  */
 interface HomeService {
-
     /**
      * 注册
      */
-    @GET("lg/todo/listnotdo/0/json/1")
-    suspend fun getHomeArticle(): WanResponse<Any>
+    @GET("banner/json")
+    suspend fun getHomeBanner(): WanResponse<List<BannerBean>>
 
 }

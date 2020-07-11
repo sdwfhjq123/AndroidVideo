@@ -1,6 +1,8 @@
 package com.yinhao.wanandroid.ui.signin
 
+import android.content.Context
 import android.view.LayoutInflater
+import androidx.core.content.edit
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -8,6 +10,7 @@ import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivitySignInBinding
+import com.yinhao.wanandroid.other.ConstantValues
 import com.yinhao.wanandroid.ui.home.HomeActivity
 import com.yinhao.wanandroid.ui.signon.SignOnActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*
@@ -52,6 +55,9 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
                 it.isLoading.let { getWaitingView().show() }
 
                 it.isSuccess?.let {
+                    getSharedPreferences(ConstantValues.SP_NAME, Context.MODE_PRIVATE).edit {
+                        putString(ConstantValues.SP_KEY_USERNAME, it.username)
+                    }
                     hideWaitingView()
                     toast("登录成功")
                     startActivity<HomeActivity>()
@@ -73,6 +79,7 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
 
         viewBinding?.etPassword?.setText("123456Aa")
         viewBinding?.etUser?.setText("sdwfhjq123")
+
     }
 
     private fun observeBtnIsEnable() {

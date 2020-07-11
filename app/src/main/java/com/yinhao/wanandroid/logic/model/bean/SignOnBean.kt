@@ -6,7 +6,7 @@ package com.yinhao.wanandroid.logic.model.bean
  * version: v1.0
  * ### description:
  */
-data class SignOnEntity(
+data class SignOnBean(
     val admin: Boolean,
     val nickName: String,
     val email: String?,
