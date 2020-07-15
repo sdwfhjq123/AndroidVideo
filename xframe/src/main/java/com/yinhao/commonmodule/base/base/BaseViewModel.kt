@@ -3,7 +3,6 @@ package com.yinhao.commonmodule.base.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yinhao.commonmodule.base.repository.livedata.holder.StateHolder
 import com.yinhao.commonmodule.base.repository.livedata.holder.WaitingHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,7 @@ open class BaseViewModel : ViewModel() {
     val noNetworkLiveData by lazy { MutableLiveData<String>() }
     val showMessageLiveData by lazy { MutableLiveData<String>() }
     val tokenOverTimeLiveData by lazy { MutableLiveData<String>() }
-    val stateLayoutLiveData by lazy { MutableLiveData<StateHolder>() }
+//    val stateLayoutLiveData by lazy { MutableLiveData<StateHolder>() }
     val waitingViewLiveData by lazy { MutableLiveData<WaitingHolder>() }
 
     open class UiState<T>(

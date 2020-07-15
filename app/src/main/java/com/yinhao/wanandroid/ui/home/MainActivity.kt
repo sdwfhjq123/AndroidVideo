@@ -2,7 +2,6 @@ package com.yinhao.wanandroid.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -12,7 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.databinding.ActivityHomeBinding
+import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.other.ConstantValues
 import com.yinhao.wanandroid.ui.home.home.HomeFragment
 import com.yinhao.wanandroid.ui.home.knowledge.KnowledgeFragment
@@ -23,7 +22,7 @@ import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), ToolbarManager {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 
     private val fragmentList = arrayListOf<Fragment>()
@@ -39,11 +38,11 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), Toolbar
         fragmentList.add(projectFragment)
     }
 
-    override fun initViewModel(): HomeViewModel =
-        ViewModelProvider(this).get(HomeViewModel::class.java)
+    override fun initViewModel(): MainViewModel =
+        ViewModelProvider(this).get(MainViewModel::class.java)
 
-    override fun initViewBinging(inflater: LayoutInflater): ActivityHomeBinding =
-        ActivityHomeBinding.inflate(inflater)
+    override fun initViewBinging(inflater: LayoutInflater): ActivityMainBinding =
+        ActivityMainBinding.inflate(inflater)
 
     override fun initView() {
         setSupportActionBar(toolbar)
@@ -87,7 +86,7 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), Toolbar
         viewBinding?.viewPager?.run {
             isUserInputEnabled = false
             offscreenPageLimit = 2
-            adapter = object : FragmentStateAdapter(this@HomeActivity) {
+            adapter = object : FragmentStateAdapter(this@MainActivity) {
                 override fun createFragment(position: Int) = fragmentList[position]
 
                 override fun getItemCount() = fragmentList.size

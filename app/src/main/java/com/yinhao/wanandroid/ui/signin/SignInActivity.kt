@@ -6,12 +6,10 @@ import androidx.core.content.edit
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.gyf.immersionbar.ImmersionBar
-import com.gyf.immersionbar.ktx.immersionBar
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivitySignInBinding
 import com.yinhao.wanandroid.other.ConstantValues
-import com.yinhao.wanandroid.ui.home.HomeActivity
+import com.yinhao.wanandroid.ui.home.MainActivity
 import com.yinhao.wanandroid.ui.signon.SignOnActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.startActivity
@@ -60,7 +58,7 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
                     }
                     hideWaitingView()
                     toast("登录成功")
-                    startActivity<HomeActivity>()
+                    startActivity<MainActivity>()
                     finish()
                 }
                 it.isError?.let { err ->
