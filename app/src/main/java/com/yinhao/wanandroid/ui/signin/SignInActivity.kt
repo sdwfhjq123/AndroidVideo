@@ -9,7 +9,7 @@ import androidx.lifecycle.observe
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivitySignInBinding
 import com.yinhao.wanandroid.other.ConstantValues
-import com.yinhao.wanandroid.ui.home.MainActivity
+import com.yinhao.wanandroid.ui.main.MainActivity
 import com.yinhao.wanandroid.ui.signon.SignOnActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.startActivity

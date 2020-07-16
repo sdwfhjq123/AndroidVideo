@@ -105,54 +105,54 @@ abstract class BaseFragmentActivity<M : BaseViewModel, SM : BaseViewModel, B : V
     /**
      * ### 获取没有网络的提示框
      */
-    protected fun getNoNetworkAlert(): MaterialDialog {
-        noNetworkAlert?.dismiss()
-        noNetworkAlert = noNetworkAlert ?: (MaterialDialog(this)
-            .lifecycleOwner(this)
-            .icon(res = R.drawable.xf_icon_common_alert)
-            .title(res = R.string.noNetwork)
-            .message(res = R.string.noNetwork_content)
-            .negativeButton(R.string.cancel) { it.dismiss() }
-            .positiveButton(R.string.goSetting) {
-                it.dismiss()
-                NetworkUtils.openWirelessSettings()
-            })
-        return noNetworkAlert!!
-    }
+//    protected fun getNoNetworkAlert(): MaterialDialog {
+//        noNetworkAlert?.dismiss()
+//        noNetworkAlert = noNetworkAlert ?: (MaterialDialog(this)
+//            .lifecycleOwner(this)
+//            .icon(res = R.drawable.xf_icon_common_alert)
+//            .title(res = R.string.noNetwork)
+//            .message(res = R.string.noNetwork_content)
+//            .negativeButton(R.string.cancel) { it.dismiss() }
+//            .positiveButton(R.string.goSetting) {
+//                it.dismiss()
+//                NetworkUtils.openWirelessSettings()
+//            })
+//        return noNetworkAlert!!
+//    }
 
     /**
      * ### 获取没有登录的提示框
      */
-    protected fun getNotSignedAlert(): MaterialDialog {
-        notSignedAlert?.dismiss()
-        notSignedAlert = notSignedAlert ?: (MaterialDialog(this)
-            .lifecycleOwner(this)
-            .icon(res = R.drawable.xf_icon_common_alert)
-            .title(res = R.string.notSigned)
-            .message(res = R.string.notSigned_content)
-            .negativeButton(R.string.cancel) { it.dismiss() }
-            .positiveButton(R.string.goSignIn) {
-                it.dismiss()
-            })
-        return notSignedAlert!!
-    }
+//    protected fun getNotSignedAlert(): MaterialDialog {
+//        notSignedAlert?.dismiss()
+//        notSignedAlert = notSignedAlert ?: (MaterialDialog(this)
+//            .lifecycleOwner(this)
+//            .icon(res = R.drawable.xf_icon_common_alert)
+//            .title(res = R.string.notSigned)
+//            .message(res = R.string.notSigned_content)
+//            .negativeButton(R.string.cancel) { it.dismiss() }
+//            .positiveButton(R.string.goSignIn) {
+//                it.dismiss()
+//            })
+//        return notSignedAlert!!
+//    }
 
     /**
      * ### 获取token过期的提示框
      */
-    protected fun getTokenOvertimeAlerter(): MaterialDialog {
-        tokenOvertimeAlert?.dismiss()
-        tokenOvertimeAlert = tokenOvertimeAlert ?: (MaterialDialog(this)
-            .lifecycleOwner(this)
-            .icon(res = R.drawable.xf_icon_common_alert)
-            .title(res = R.string.tokenOvertime)
-            .message(res = R.string.tokenOvertime_content)
-            .negativeButton(R.string.cancel) { it.dismiss() }
-            .positiveButton(R.string.reSignIn) {
-                it.dismiss()
-            })
-        return tokenOvertimeAlert!!
-    }
+//    protected fun getTokenOvertimeAlerter(): MaterialDialog {
+//        tokenOvertimeAlert?.dismiss()
+//        tokenOvertimeAlert = tokenOvertimeAlert ?: (MaterialDialog(this)
+//            .lifecycleOwner(this)
+//            .icon(res = R.drawable.xf_icon_common_alert)
+//            .title(res = R.string.tokenOvertime)
+//            .message(res = R.string.tokenOvertime_content)
+//            .negativeButton(R.string.cancel) { it.dismiss() }
+//            .positiveButton(R.string.reSignIn) {
+//                it.dismiss()
+//            })
+//        return tokenOvertimeAlert!!
+//    }
 
     /**
      * ### 设置statusBar

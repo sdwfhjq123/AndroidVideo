@@ -121,5 +121,6 @@ dependencies {
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1"
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api 'com.classic.common:multiple-status-view:1.7'
+    api 'com.github.ybq:Android-SpinKit:1.4.0'
 
 }

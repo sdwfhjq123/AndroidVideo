@@ -30,7 +30,7 @@
             android:paddingEnd="@dimen/xf_px_9"
             android:paddingBottom="@dimen/xf_px_5"
             android:text="@string/item_top_tip"
-            android:textColor="@color/Red"
+            android:textColor="@color/xf_Red"
             android:textSize="@dimen/xf_px_21"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -47,7 +47,7 @@
             android:paddingEnd="@dimen/xf_px_9"
             android:paddingBottom="@dimen/xf_px_5"
             android:text="@string/item_the_newest"
-            android:textColor="@color/Red"
+            android:textColor="@color/xf_Red"
             android:textSize="@dimen/xf_px_21"
             android:visibility="gone"
             tools:visibility="visible" />
