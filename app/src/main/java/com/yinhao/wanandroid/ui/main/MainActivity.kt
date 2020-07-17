@@ -2,9 +2,11 @@ package com.yinhao.wanandroid.ui.main
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -34,6 +36,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
     private val systemFragment by lazy { SystemFragment() }
     private val projectFragment by lazy { ProjectFragment() }
 
+    private var mTabIndex = 0
+
     init {
         fragmentList.add(homeFragment)
         fragmentList.add(squareFragment)
@@ -49,21 +53,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
         ActivityMainBinding.inflate(inflater)
 
     override fun initView() {
-        setSupportActionBar(toolbar)
-        enableHomeAsUp(0f) {
-            viewBinding?.drawerLayout?.open()
-        }
+        initToolbar()
 
         initViewPager()
         viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
 
-        val toggle = ActionBarDrawerToggle(
-            this, viewBinding?.drawerLayout, toolbar,
-            R.string.app_name, R.string.app_name
-        )
-        toggle.syncState()
-        viewBinding?.drawerLayout?.addDrawerListener(toggle)
-
+        //navigationView的赋值
         val usernameSp =
             getSharedPreferences(ConstantValues.SP_NAME, Context.MODE_PRIVATE).getString(
                 ConstantValues.SP_KEY_USERNAME,
@@ -86,6 +81,35 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_home, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+//    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+//        menu.clear()
+//        when (mTabIndex) {
+//            1 -> menuInflater.inflate(R.menu.menu_square, menu)
+//            else -> menuInflater.inflate(R.menu.menu_home, menu)
+//        }
+//        return super.onPrepareOptionsMenu(menu)
+//    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        enableHomeAsUp(0f) {
+            viewBinding?.drawerLayout?.open()
+        }
+        enableMenu()
+
+        val toggle = ActionBarDrawerToggle(
+            this, viewBinding?.drawerLayout, toolbar,
+            R.string.app_name, R.string.app_name
+        )
+        toggle.syncState()
+        viewBinding?.drawerLayout?.addDrawerListener(toggle)
+    }
+
     private fun initViewPager() {
         viewBinding?.viewPager?.run {
             isUserInputEnabled = false
@@ -96,6 +120,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
                 override fun getItemCount() = fragmentList.size
             }
         }
+
     }
 
     private val onNavigationItemSelected = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -109,11 +134,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
                 toolbarTitle = getString(R.string.bottom_nav_square)
             }
             R.id.nav_wechat -> {
-                switchFragment(3)
+                switchFragment(2)
                 toolbarTitle = getString(R.string.bottom_nav_wechat)
             }
             R.id.nav_system -> {
-                switchFragment(2)
+                switchFragment(3)
                 toolbarTitle = getString(R.string.bottom_nav_system)
             }
             R.id.nav_project -> {
@@ -125,6 +150,14 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
     }
 
     private fun switchFragment(position: Int): Boolean {
+        mTabIndex = position
+//        invalidateOptionsMenu()
+//        if (mTabIndex == 1) {
+//            enableMenu(R.menu.menu_square)
+//        } else {
+//            enableMenu(R.menu.menu_home)
+//        }
+        setToolbarMenu(mTabIndex)
         viewBinding?.viewPager?.setCurrentItem(position, false)
         return true
     }

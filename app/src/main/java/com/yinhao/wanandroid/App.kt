@@ -6,6 +6,10 @@ import androidx.multidex.MultiDex
 import com.blankj.utilcode.util.Utils
 import com.bumptech.glide.Glide
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+
 
 /**
  * author:  yinhao
@@ -20,6 +24,26 @@ class App : Application() {
         @JvmStatic
         lateinit var instance: App
             private set
+
+        init {
+            //设置全局的Header构建器
+
+            //设置全局的Header构建器
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                //全局设置主题颜色
+                layout.setPrimaryColorsId(
+                    R.color.colorPrimary,
+                    android.R.color.white
+                )
+                //.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+                ClassicsHeader(context)
+            }
+            //设置全局的Footer构建器
+            //设置全局的Footer构建器
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> //指定为经典Footer，默认是 BallPulseFooter
+                ClassicsFooter(context).setDrawableSize(20f)
+            }
+        }
     }
 
     override fun onCreate() {

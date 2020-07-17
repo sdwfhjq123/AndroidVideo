@@ -1,6 +1,8 @@
 package com.yinhao.wanandroid.ui.main.home
 
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -10,6 +12,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.FragmentHomeBinding
 import com.youth.banner.indicator.CircleIndicator
 import org.jetbrains.anko.toast

@@ -3,9 +3,8 @@ package com.yinhao.wanandroid.widget
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.appcompat.widget.Toolbar
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.ui.signin.SignInActivity
 import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  * author:  yinhao
@@ -22,16 +21,17 @@ interface ToolbarManager {
             toolbar.title = value
         }
 
-    fun enableHomeAsUp(icon: Float = 1f,up: () -> Unit ) {
+    fun enableHomeAsUp(icon: Float = 1f, up: () -> Unit) {
         toolbar.navigationIcon = createUpDrawable(icon)
         toolbar.setNavigationOnClickListener { up() }
     }
 
-    fun enableMenu(id: Int = R.menu.menu_home, up: () -> Unit) {
+    fun enableMenu(id: Int = R.menu.menu_home, up: () -> Unit = {}) {
         toolbar.inflateMenu(id)
         toolbar.onMenuItemClick {
             when (it!!.itemId) {
-                R.id.action_menu -> toolbar.context.startActivity<SignInActivity>()
+                R.id.action_share -> toolbar.context.toast("share")
+                R.id.action_search -> toolbar.context.toast("search")
                 else -> up()
             }
             true
@@ -40,6 +40,11 @@ interface ToolbarManager {
 
     fun hiddenMenu(redId: Int) {
         toolbar.menu.findItem(redId).isVisible = false
+    }
+
+    fun setToolbarMenu(index: Int) {
+        toolbar.menu.clear()
+        if (index == 1) enableMenu(R.menu.menu_square) else enableMenu()
     }
 
     private fun createUpDrawable(icon: Float) =

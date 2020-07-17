@@ -1,7 +1,9 @@
 package com.yinhao.wanandroid.ui.main.square
 
-import androidx.fragment.app.Fragment
-import com.yinhao.wanandroid.R
+import android.view.*
+import androidx.lifecycle.ViewModelProvider
+import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.databinding.FragmentSquareBinding
 
 /**
  * author:  yinhao
@@ -9,6 +11,18 @@ import com.yinhao.wanandroid.R
  * version: v1.0
  * ### description:
  */
-class SquareFragment : Fragment(R.layout.fragment_square) {
+class SquareFragment : BaseFragment<SquareViewModel, FragmentSquareBinding>() {
+
+    override fun initViewModel(): SquareViewModel =
+        ViewModelProvider(this).get(SquareViewModel::class.java)
+
+    override fun initViewBinding(inflater: LayoutInflater, container: ViewGroup?)
+            : FragmentSquareBinding = FragmentSquareBinding.inflate(layoutInflater)
+
+    override fun initView() {
+    }
+
+    override fun initData() {
+    }
 
 }
