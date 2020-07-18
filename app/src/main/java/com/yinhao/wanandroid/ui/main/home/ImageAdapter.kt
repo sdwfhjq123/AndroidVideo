@@ -1,11 +1,17 @@
 package com.yinhao.wanandroid.ui.main.home
 
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.logic.model.bean.BannerBean
 import com.youth.banner.adapter.BannerAdapter
+import com.youth.banner.util.BannerUtils
+import org.jetbrains.anko.find
+
 
 /**
  * author:  yinhao
@@ -23,14 +29,10 @@ class ImageAdapter(data: List<BannerBean>?) :
         parent: ViewGroup,
         viewType: Int
     ): BannerViewHolder {
-        val imageView = ImageView(parent.context)
+        val view = BannerUtils.getView(parent, R.layout.layout_banner)
+
         //注意，必须设置为match_parent，这个是viewpager2强制要求的
-        imageView.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        return BannerViewHolder(imageView)
+        return BannerViewHolder(view)
     }
 
     override fun onBindView(
@@ -39,9 +41,12 @@ class ImageAdapter(data: List<BannerBean>?) :
         position: Int,
         size: Int
     ) {
-        Glide.with(holder.imageView).load(data.imagePath).into(holder.imageView)
+        Glide.with(holder.view.context).load(data.imagePath).into(holder.imageView)
+        holder.tvDesc.text = data.desc
     }
 
-    inner class BannerViewHolder(var imageView: ImageView) :
-        RecyclerView.ViewHolder(imageView)
+    inner class BannerViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+        val tvDesc: TextView = view.findViewById(R.id.tv_desc)
+        val imageView: ImageView = view.findViewById(R.id.image_view)
+    }
 }

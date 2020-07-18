@@ -29,7 +29,10 @@
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/xf_px_400"
-                    app:indicator_gravity="right" />
+                    app:indicator_gravity="right"
+                    app:indicator_marginBottom="@dimen/xf_px_25"
+                    app:indicator_marginRight="@dimen/xf_px_10"
+                    app:indicator_selected_color="@android:color/white" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
