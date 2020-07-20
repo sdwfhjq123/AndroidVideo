@@ -17,11 +17,13 @@ import kotlinx.coroutines.withContext
  */
 
 open class BaseViewModel : ViewModel() {
+
     val notSignLiveData by lazy { MutableLiveData<String>() }
     val noNetworkLiveData by lazy { MutableLiveData<String>() }
     val showMessageLiveData by lazy { MutableLiveData<String>() }
     val tokenOverTimeLiveData by lazy { MutableLiveData<String>() }
-//    val stateLayoutLiveData by lazy { MutableLiveData<StateHolder>() }
+
+    //    val stateLayoutLiveData by lazy { MutableLiveData<StateHolder>() }
     val waitingViewLiveData by lazy { MutableLiveData<WaitingHolder>() }
 
     open class UiState<T>(
@@ -36,11 +38,11 @@ open class BaseViewModel : ViewModel() {
         var showError: String? = null,
         var showSuccess: T? = null,
         var showEnd: Boolean = false, // 加载更多
-        var isRefresh: Boolean = false // 刷新
+        var isRefresh: Boolean = false,// 刷新
+        val needLogin: Boolean? = null
     )
 
     val mException: MutableLiveData<Throwable> = MutableLiveData()
-
 
     fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
 

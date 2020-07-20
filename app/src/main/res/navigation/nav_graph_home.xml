@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/navFragment"
-        android:name="com.yinhao.wanandroid.ui.main.nav.WechatFragment"
+        android:name="com.yinhao.wanandroid.ui.main.wechat.WechatFragment"
         android:label="@string/bottom_nav_wechat"
         tools:layout="@layout/fragment_wechat" >
         <action

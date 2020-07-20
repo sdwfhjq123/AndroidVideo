@@ -6,7 +6,6 @@ import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -17,7 +16,7 @@ import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.other.ConstantValues
 import com.yinhao.wanandroid.ui.main.home.HomeFragment
 import com.yinhao.wanandroid.ui.main.system.SystemFragment
-import com.yinhao.wanandroid.ui.main.nav.WechatFragment
+import com.yinhao.wanandroid.ui.main.wechat.WechatFragment
 import com.yinhao.wanandroid.ui.main.project.ProjectFragment
 import com.yinhao.wanandroid.ui.main.square.SquareFragment
 import com.yinhao.wanandroid.ui.signin.SignInActivity
@@ -25,7 +24,7 @@ import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-//TODO 广场，floatingactionbar,切换每个tab页toolbar menu的切换，轮播图的优化
+//TODO 公众号条目改为knowledge
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 

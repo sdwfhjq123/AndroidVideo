@@ -80,7 +80,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 viewBinding?.multipleStatusView?.showError()
             }
         }
-
     }
 
     private fun initRefresh() {
