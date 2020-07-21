@@ -23,4 +23,6 @@ object SquareRepository : BaseRepository() {
         val request = squareService.getSquareList(pageNum)
         return executeResponse(request)
     }
+
+
 }

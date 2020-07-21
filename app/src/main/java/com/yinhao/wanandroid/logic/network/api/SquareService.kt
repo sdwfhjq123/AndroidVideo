@@ -15,4 +15,6 @@ interface SquareService {
 
     @GET("user_article/list/{pageNum}/json")
     suspend fun getSquareList(@Path("pageNum") pageNum: Int): WanResponse<ArticleListBean>
+
+
 }

@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentWechatBinding
 import com.yinhao.wanandroid.logic.model.bean.WXChapterBean
-import com.yinhao.wanandroid.ui.main.wechat.item.WxItemFragment
+import com.yinhao.wanandroid.ui.main.wechat.item.KnowledgeFragment
 
 /**
  * author:  yinhao
@@ -47,7 +47,7 @@ class WechatFragment : BaseFragment<WechatViewModel, FragmentWechatBinding>() {
 
                 override fun createFragment(position: Int): Fragment {
                     // 实例化Fragment
-                    return WxItemFragment.newInstance()
+                    return KnowledgeFragment.newInstance(mTabList[position].id)
                 }
             }
         }
@@ -63,7 +63,6 @@ class WechatFragment : BaseFragment<WechatViewModel, FragmentWechatBinding>() {
         viewModel.tabUiState.observe(this) {
             it.isSuccess.let { list ->
                 mTabList = list!!
-
                 initTab()
             }
         }

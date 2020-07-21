@@ -19,6 +19,7 @@ object WechatRepository : BaseRepository() {
         ServiceCreator.getInstance().create(WechatService::class.java)
     }
 
+
     suspend fun getWxTabList(): Result<List<WXChapterBean>> {
         return safeApiCall(call = { requestWxTabList() }, errorMessage = "获取失败")
     }
@@ -27,11 +28,11 @@ object WechatRepository : BaseRepository() {
         return executeResponse(wechatService.getWxTabList())
     }
 
-    suspend fun getListByWx(page: Int, cid: Int): Result<ArticleListBean> {
-        return safeApiCall(call = { requestListByWx(page, cid) }, errorMessage = "获取失败")
+    suspend fun getArticleHistoryByWx(id: Int, page: Int): Result<ArticleListBean> {
+        return safeApiCall(call = { requestArticleHistoryByWx(id, page) }, errorMessage = "获取失败")
     }
 
-    private suspend fun requestListByWx(page: Int, cid: Int): Result<ArticleListBean> {
-        return executeResponse(wechatService.getListByWx(page, cid))
+    private suspend fun requestArticleHistoryByWx(id: Int, page: Int): Result<ArticleListBean> {
+        return executeResponse(wechatService.getArticleHistoryByWx(id, page))
     }
 }

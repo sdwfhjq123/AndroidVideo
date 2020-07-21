@@ -25,7 +25,7 @@ class HomeViewModel : BaseViewModel() {
     val uiState: LiveData<ArticleUiModel>
         get() = _uiState
 
-    private var pageNum = 0
+    private var pageNum = 1
 
     fun getHomeBanner() {
         launchOnUI {
@@ -39,7 +39,7 @@ class HomeViewModel : BaseViewModel() {
     fun getArticleList(isRefresh: Boolean) {
         launchOnUI {
             if (isRefresh) {
-                pageNum = 0
+                pageNum = 1
             }
             emitArticleUiState(true)
             val deferred = async { HomeRepository.getArticleList(pageNum) }

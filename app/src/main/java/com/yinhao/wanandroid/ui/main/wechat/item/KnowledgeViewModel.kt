@@ -1,25 +1,21 @@
-package com.yinhao.wanandroid.ui.main.square
+package com.yinhao.wanandroid.ui.main.wechat.item
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
 import com.yinhao.wanandroid.logic.model.bean.ArticleBean
-import com.yinhao.wanandroid.logic.model.bean.ArticleListBean
-import com.yinhao.wanandroid.logic.model.bean.WXChapterBean
-import com.yinhao.wanandroid.logic.network.repository.SquareRepository
+import com.yinhao.wanandroid.logic.network.repository.WechatRepository
 import com.yinhao.wanandroid.other.checkResult
-import com.yinhao.wanandroid.ui.main.home.HomeViewModel
 import kotlinx.coroutines.launch
 
 /**
  * author:  yinhao
- * date:    2020/7/17
+ * date:    2020/7/20
  * version: v1.0
  * ### description:
  */
-class SquareViewModel : BaseViewModel() {
-
+class KnowledgeViewModel : BaseViewModel() {
     private val _uiState = MutableLiveData<BaseUiModel<List<ArticleBean>>>()
 
     val uiState: LiveData<BaseUiModel<List<ArticleBean>>>
@@ -27,12 +23,12 @@ class SquareViewModel : BaseViewModel() {
 
     private var pageNum = 1
 
-    fun getSquareList(isRefresh: Boolean) {
+    fun getArticleHistoryByWx(id: Int, isRefresh: Boolean) {
         if (isRefresh) pageNum = 1
 
         emitArticleUiState(showLoading = true)
         viewModelScope.launch {
-            val result = SquareRepository.getSquareList(pageNum)
+            val result = WechatRepository.getArticleHistoryByWx(id, pageNum)
             result.checkResult(
                 onSuccess = {
                     pageNum++
@@ -48,7 +44,6 @@ class SquareViewModel : BaseViewModel() {
             )
         }
     }
-
 
     private fun emitArticleUiState(
         showLoading: Boolean = false,
