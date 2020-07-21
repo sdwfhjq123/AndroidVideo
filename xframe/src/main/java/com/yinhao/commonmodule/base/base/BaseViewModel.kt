@@ -55,4 +55,5 @@ open class BaseViewModel : ViewModel() {
             block
         }
     }
+
 }

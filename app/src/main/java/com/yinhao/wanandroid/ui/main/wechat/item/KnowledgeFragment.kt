@@ -28,7 +28,7 @@ class KnowledgeFragment : BaseFragment<KnowledgeViewModel, FragmentKnowledgeBind
 
     companion object {
 
-        fun newInstance(id: Int): Fragment {
+        fun newInstance(id: Int): KnowledgeFragment {
             val args = Bundle()
             args.putInt("id", id)
             val fragment = KnowledgeFragment()

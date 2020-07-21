@@ -3,6 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="viewBackground">@color/xf_White</color>
+    <color name="windowBackground">@color/xf_Grey100</color>
+    <color name="line_divider">@color/xf_Grey300</color>
+    <color name="list_divider">@color/xf_Grey400</color>
+    <color name="mask_color">#f5f5f5</color>
+    <color name="arrow_color">@color/xf_Grey700</color>
 
     <color name="tabColor_active">@color/colorPrimary</color>
     <color name="tabColor_inactive">#959595</color>

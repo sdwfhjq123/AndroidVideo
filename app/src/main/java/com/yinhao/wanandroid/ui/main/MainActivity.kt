@@ -24,7 +24,7 @@ import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-//TODO 公众号条目改为knowledge
+//TODO 体系功能实现
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 
