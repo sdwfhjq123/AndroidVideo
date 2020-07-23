@@ -20,5 +20,7 @@
     <color name="item_date">@color/xf_Grey600</color>
     <color name="item_chapter">@color/xf_Grey600</color>
 
+    <color name="vertical_tab_layout_bg">@color/xf_Grey100</color>
+    <color name="vertical_tab_layout_indicator_color">@android:color/white</color>
 
 </resources>

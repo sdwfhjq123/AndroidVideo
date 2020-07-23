@@ -1,4 +1,4 @@
-package com.yinhao.wanandroid.ui.main.system.systemChild
+package com.yinhao.wanandroid.ui.main.system.knowledge
 
 import android.text.Html
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -23,7 +23,6 @@ class KnowledgeTreeAdapter :
                     Html.fromHtml(child.name)
                 })
             )
-
         }
     }
 }

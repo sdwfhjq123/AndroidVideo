@@ -47,10 +47,12 @@ android {
 
 dependencies {
     implementation project(':xframe')
+    implementation project(':verticaltablayout')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.youth.banner:banner:2.0.12'
+    implementation 'com.github.donkingliang:LabelsView:1.6.1'
 }

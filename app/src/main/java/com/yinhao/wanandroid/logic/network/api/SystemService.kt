@@ -2,6 +2,7 @@ package com.yinhao.wanandroid.logic.network.api
 
 import com.yinhao.wanandroid.logic.model.WanResponse
 import com.yinhao.wanandroid.logic.model.bean.KnowledgeTreeBean
+import com.yinhao.wanandroid.logic.model.bean.NavigationBean
 import retrofit2.http.GET
 
 /**
@@ -17,4 +18,7 @@ interface SystemService {
      */
     @GET("tree/json")
     suspend fun getSystemData(): WanResponse<List<KnowledgeTreeBean>>
+
+    @GET("navi/json")
+    suspend fun getNavData(): WanResponse<List<NavigationBean>>
 }

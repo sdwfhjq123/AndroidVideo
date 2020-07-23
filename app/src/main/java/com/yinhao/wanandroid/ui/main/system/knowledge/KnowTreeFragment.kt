@@ -1,17 +1,15 @@
-package com.yinhao.wanandroid.ui.main.system.systemChild
+package com.yinhao.wanandroid.ui.main.system.knowledge
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentKnowTreeBinding
-import com.yinhao.wanandroid.logic.model.bean.KnowledgeTreeBean
 import org.jetbrains.anko.toast
 
 /**
@@ -59,7 +57,7 @@ class KnowTreeFragment : BaseFragment<KnowTreeViewModel, FragmentKnowTreeBinding
 
             it.isError?.let { err ->
                 activity?.toast(err)
-//                viewBinding?.multipleStatusView?.showError()
+                viewBinding?.multipleStatusView?.showError()
             }
         }
     }

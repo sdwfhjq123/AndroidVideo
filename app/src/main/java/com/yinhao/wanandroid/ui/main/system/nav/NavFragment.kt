@@ -3,8 +3,15 @@ package com.yinhao.wanandroid.ui.main.system.nav
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.verticaltablayout.VerticalTabLayout
+import com.yinhao.verticaltablayout.widget.TabView
 import com.yinhao.wanandroid.databinding.FragmentNavBinding
+import com.yinhao.wanandroid.logic.model.bean.NavigationBean
+import org.jetbrains.anko.toast
 
 /**
  * author:  yinhao
@@ -13,6 +20,12 @@ import com.yinhao.wanandroid.databinding.FragmentNavBinding
  * ### description:
  */
 class NavFragment : BaseFragment<NavViewModel, FragmentNavBinding>() {
+    private val mRightAdapter by lazy { NavInfoAdapter() }
+    private val mLayoutManager by lazy { LinearLayoutManager(activity) }
+    private var mBScroll: Boolean = false
+    private var mCurrentIndex: Int = 0
+    private var mBclickTab: Boolean = false
+
     companion object {
         fun newInstance(): NavFragment {
             val fragment = NavFragment()
@@ -29,8 +42,136 @@ class NavFragment : BaseFragment<NavViewModel, FragmentNavBinding>() {
     ): FragmentNavBinding = FragmentNavBinding.inflate(layoutInflater)
 
     override fun initView() {
+        initRecyclerView()
+        viewObserver()
     }
 
     override fun initData() {
+        viewModel.getNavData()
     }
+
+    private fun viewObserver() {
+        viewModel.navData.observe(this) {
+            it.isSuccess?.let { list ->
+                initNavTabView(list)
+            }
+            it.isError?.let { err ->
+                viewBinding?.multipleStatusView?.showError()
+                activity?.toast(err)
+            }
+        }
+    }
+
+    private fun initNavTabView(list: List<NavigationBean>) {
+        list.let {
+            viewBinding?.navigationTabLayout?.setTabAdapter(NavigationTabAdapter(activity, list))
+            mRightAdapter.setNewData(it as MutableList<NavigationBean>)
+        }
+    }
+
+    private fun initRecyclerView() {
+        viewBinding?.recyclerViewRight?.run {
+            layoutManager = mLayoutManager
+            adapter = mRightAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (mBScroll && (newState == RecyclerView.SCROLL_STATE_IDLE)) {
+                        scrollRecyclerView()
+                    }
+                    rightLinkLeft(newState)
+                }
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (mBScroll) {
+                        scrollRecyclerView()
+                    }
+                }
+            })
+        }
+
+        viewBinding?.navigationTabLayout?.addOnTabSelectedListener(object :
+            VerticalTabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabView?, position: Int) {
+            }
+
+            override fun onTabSelected(tab: TabView?, position: Int) {
+                mBScroll = true
+                selectTab(position)
+            }
+        })
+
+    }
+
+    private fun scrollRecyclerView() {
+        mBScroll = false
+        val indexDistance: Int = mCurrentIndex - mLayoutManager.findFirstVisibleItemPosition()
+        if (indexDistance > 0 && indexDistance < viewBinding!!.recyclerViewRight.childCount) {
+            val top: Int = viewBinding.recyclerViewRight.getChildAt(indexDistance).top
+            viewBinding.recyclerViewRight.smoothScrollBy(0, top)
+        }
+    }
+
+    /**
+     * Right RecyclerView link Left TabLayout
+     *
+     * @param newState RecyclerView Scroll State
+     */
+    private fun rightLinkLeft(newState: Int) {
+        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+            if (mBScroll) {
+                mBScroll = false
+                return
+            }
+            val firstPosition: Int = mLayoutManager.findFirstVisibleItemPosition()
+            if (firstPosition != mCurrentIndex) {
+                mCurrentIndex = firstPosition
+                setChecked(mCurrentIndex)
+            }
+        }
+    }
+
+    /**
+     * Smooth Right RecyclerView to Select Left TabLayout
+     *
+     * @param position checked position
+     */
+    private fun setChecked(position: Int) {
+        if (mBclickTab) {
+            mBclickTab = false
+        } else {
+            viewBinding?.navigationTabLayout?.setTabSelected(mCurrentIndex)
+        }
+        mCurrentIndex = position
+    }
+
+    /**
+     * Select Left TabLayout to Smooth Right RecyclerView
+     */
+    private fun selectTab(position: Int) {
+        mCurrentIndex = position
+        viewBinding?.recyclerViewRight?.stopScroll()
+        smoothScrollToPosition(position)
+    }
+
+    private fun smoothScrollToPosition(position: Int) {
+        val firstPosition: Int = mLayoutManager.findFirstVisibleItemPosition()
+        val lastPosition: Int = mLayoutManager.findLastVisibleItemPosition()
+        when {
+            position <= firstPosition -> {
+                viewBinding?.recyclerViewRight?.smoothScrollToPosition(position)
+            }
+            position <= lastPosition -> {
+                val top: Int =
+                    viewBinding!!.recyclerViewRight.getChildAt(position - firstPosition)!!.top
+                viewBinding.recyclerViewRight.smoothScrollBy(0, top)
+            }
+            else -> {
+                viewBinding?.recyclerViewRight?.smoothScrollToPosition(position)
+                mBScroll = true
+            }
+        }
+    }
+
 }

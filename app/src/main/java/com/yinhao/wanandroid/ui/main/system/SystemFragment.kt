@@ -10,7 +10,7 @@ import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.FragmentSystemBinding
 import com.yinhao.wanandroid.ui.main.system.nav.NavFragment
-import com.yinhao.wanandroid.ui.main.system.systemChild.KnowTreeFragment
+import com.yinhao.wanandroid.ui.main.system.knowledge.KnowTreeFragment
 
 /**
  * author:  yinhao

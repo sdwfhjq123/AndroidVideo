@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.classic.common.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/multiple_status_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:emptyView="@layout/xf_layout_empty_view"
+    app:errorView="@layout/xf_layout_error_view"
+    app:loadingView="@layout/xf_layout_loading_view"
+    app:noNetworkView="@layout/xf_layout_network_view">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/normal_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <com.yinhao.verticaltablayout.VerticalTabLayout
+            android:id="@+id/navigation_tab_layout"
+            android:layout_width="@dimen/xf_px_220"
+            android:layout_height="match_parent"
+            android:background="@color/vertical_tab_layout_bg"
+            app:vertical_indicator_color="@color/vertical_tab_layout_indicator_color"
+            app:vertical_indicator_gravity="fill"
+            app:tab_height="@dimen/xf_px_100"
+            app:tab_margin="@dimen/xf_px_32"
+            app:tab_mode="scrollable" />
+
+        <View
+            android:id="@+id/navigation_divider"
+            android:layout_width="@dimen/xf_px_1"
+            android:layout_height="match_parent"
+            android:background="@color/line_divider" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_article" />
+    </LinearLayout>
+
+
+</com.classic.common.MultipleStatusView>
