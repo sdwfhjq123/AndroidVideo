@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.yinhao.wanandroid.ui.main.home.HomeFragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.home.HomeFragment"
         android:label="@string/bottom_nav_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/knowledgeFragment"
-        android:name="com.yinhao.wanandroid.ui.main.system.SystemFragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.system.SystemFragment"
         android:label="@string/bottom_nav_system"
         tools:layout="@layout/fragment_system" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/navFragment"
-        android:name="com.yinhao.wanandroid.ui.main.wechat.WechatFragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment"
         android:label="@string/bottom_nav_wechat"
         tools:layout="@layout/fragment_wechat" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/projectFragment"
-        android:name="com.yinhao.wanandroid.ui.main.project.ProjectFragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.project.ProjectFragment"
         android:label="@string/bottom_nav_project"
         tools:layout="@layout/fragment_project" >
         <action

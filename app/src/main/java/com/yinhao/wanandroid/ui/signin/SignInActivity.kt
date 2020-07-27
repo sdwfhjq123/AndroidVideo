@@ -6,6 +6,7 @@ import androidx.core.content.edit
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivitySignInBinding
 import com.yinhao.wanandroid.other.ConstantValues
@@ -53,12 +54,14 @@ class SignInActivity : BaseActivity<SignInViewModel, ActivitySignInBinding>() {
                 it.isLoading.let { getWaitingView().show() }
 
                 it.isSuccess?.let {
-                    getSharedPreferences(ConstantValues.SP_NAME, Context.MODE_PRIVATE).edit {
-                        putString(ConstantValues.SP_KEY_USERNAME, it.username)
+                    //TODO 用sp存储登录信息，然后点击判断sp存储。实现跳转loginActivity,然后MainActivity用livedataevents判断，其他的用sp
+                    //TODO 用room实现用户信息表
+                    getSharedPreferences(ConstantValues.PREF_NAME, Context.MODE_PRIVATE).edit {
+                        putString(ConstantValues.USERNAME_KEY, it.username)
                     }
                     hideWaitingView()
                     toast("登录成功")
-                    startActivity<MainActivity>()
+                    LiveEventBus.get("login").post(true)
                     finish()
                 }
                 it.isError?.let { err ->

@@ -1,24 +1,27 @@
 package com.yinhao.wanandroid.ui.main
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.other.ConstantValues
-import com.yinhao.wanandroid.ui.main.home.HomeFragment
-import com.yinhao.wanandroid.ui.main.system.SystemFragment
-import com.yinhao.wanandroid.ui.main.wechat.WechatFragment
-import com.yinhao.wanandroid.ui.main.project.ProjectFragment
-import com.yinhao.wanandroid.ui.main.square.SquareFragment
+import com.yinhao.wanandroid.ui.fragment.home.HomeFragment
+import com.yinhao.wanandroid.ui.fragment.system.SystemFragment
+import com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment
+import com.yinhao.wanandroid.ui.fragment.project.ProjectFragment
+import com.yinhao.wanandroid.ui.fragment.square.SquareFragment
 import com.yinhao.wanandroid.ui.signin.SignInActivity
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
@@ -54,29 +57,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
         initToolbar()
 
         initViewPager()
-        viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
 
-        //navigationView的赋值
-        val usernameSp =
-            getSharedPreferences(ConstantValues.SP_NAME, Context.MODE_PRIVATE).getString(
-                ConstantValues.SP_KEY_USERNAME,
-                ""
-            )
-        val inflateHeaderView = viewBinding?.navView?.getHeaderView(0)
-        val tvUsername = inflateHeaderView?.find<TextView>(R.id.tv_username)
-        tvUsername?.text = usernameSp
+        initFragment()
+
+        initNavView()
+
+        viewObserver()
     }
 
     override fun initData() {
-        val usernameSp =
-            getSharedPreferences(ConstantValues.SP_NAME, Context.MODE_PRIVATE).getString(
-                ConstantValues.SP_KEY_USERNAME,
-                ""
-            )
-        if (usernameSp.isNullOrEmpty()) {
-            startActivity<SignInActivity>()
-            finish()
-        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -92,6 +82,30 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
 //        }
 //        return super.onPrepareOptionsMenu(menu)
 //    }
+
+    private fun viewObserver() {
+        LiveEventBus.get("login", Boolean::class.java)
+            .observe(this, Observer {
+                Log.i("滴滴滴", it.toString())
+            })
+    }
+
+    private fun initNavView() {
+        //navigationView的赋值
+        val usernameSp =
+            getSharedPreferences(ConstantValues.PREF_NAME, Context.MODE_PRIVATE).getString(
+                ConstantValues.USERNAME_KEY,
+                ""
+            )
+        val inflateHeaderView = viewBinding?.navView?.getHeaderView(0)
+        val tvUsername = inflateHeaderView?.find<TextView>(R.id.tv_username)
+        tvUsername?.text = usernameSp
+    }
+
+
+    private fun initFragment() {
+        viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
+    }
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)

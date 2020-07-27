@@ -11,9 +11,14 @@ class ConstantValues {
     companion object {
         const val DEBUG = true
         const val PREF_USER_RECORD = "PREF_USER_RECORD"
+
         const val BASE_URL = "https://www.wanandroid.com/"
 
-        const val SP_NAME = "sp_wan_android"
-        const val SP_KEY_USERNAME = "sp_key_username"
+        const val PREF_NAME="wan_android"//TODO 放到pref类里
+        const val USERNAME_KEY = "username"
+        const val LOGIN_KEY = "login"
+        const val PASSWORD_KEY = "password"
+        const val TOKEN_KEY = "token"
+        const val HAS_NETWORK_KEY = "has_network"
     }
 }
