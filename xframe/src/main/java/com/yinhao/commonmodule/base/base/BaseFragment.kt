@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yinhao.commonmodule.base.utils.Preference
 
 /**
  * author:      SHIGUANG
@@ -21,6 +22,7 @@ abstract class BaseFragment<M : BaseViewModel, B : ViewBinding>
     open var barDarkMode = false
     protected val viewModel: M by lazy { initViewModel() }
 
+    protected var prefIsLogin by Preference("LOGIN_KEY",false)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         viewBinding?.root ?: bindViewBinding(initViewBinding(inflater, container), this)

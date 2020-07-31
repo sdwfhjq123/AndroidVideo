@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.BannerBean
+import com.yinhao.wanandroid.model.bean.BannerBean
 import com.youth.banner.adapter.BannerAdapter
 import com.youth.banner.util.BannerUtils
 

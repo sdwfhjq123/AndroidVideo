@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
+import com.yinhao.wanandroid.model.bean.ArticleBean
 
 /**
  * Created by chenxz on 2018/5/20.
@@ -24,6 +24,6 @@ class ProjectAdapter : BaseQuickAdapter<ArticleBean, BaseViewHolder>(R.layout.it
             )
 //            .addOnClickListener(R.id.item_project_list_like_iv)
         Glide.with(context).load(item.envelopePic)
-            .into(helper.getView(R.id.iv_article_thumbnail))
+            .into(helper.getView(R.id.item_project_list_iv))
     }
 }

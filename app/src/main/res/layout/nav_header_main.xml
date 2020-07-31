@@ -1,36 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_view_header"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/xf_px_400"
-    android:background="@color/colorPrimary"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:foreground="?attr/selectableItemBackground"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/xf_px_50"
-    android:paddingTop="@dimen/xf_px_50"
-    android:paddingRight="@dimen/xf_px_50"
-    android:paddingBottom="@dimen/xf_px_50"
+    android:paddingLeft="@dimen/xf_px_32"
+    android:paddingTop="@dimen/xf_px_72"
+    android:paddingRight="@dimen/xf_px_32"
+    android:paddingBottom="@dimen/xf_px_20"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="111"
-        android:paddingTop="@dimen/xf_px_30"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:id="@+id/iv_rank"
+        android:layout_width="@dimen/xf_px_40"
+        android:layout_height="@dimen/xf_px_40"
+        android:layout_gravity="end"
+        app:srcCompat="@drawable/ic_rank_white_24dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/xf_px_160"
+        android:layout_height="@dimen/xf_px_160"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_default_avatar"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/tv_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/xf_px_30"
-        android:text="111111"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1111" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/xf_px_24"
+        android:text="@string/go_login"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/xf_px_32"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/xf_px_16"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_id"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+        <TextView
+            android:id="@+id/tv_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_line_4"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/xf_px_16"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/nav_grade"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+        <TextView
+            android:id="@+id/tv_user_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/nav_line_2"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/xf_px_16"
+            android:text="@string/nav_rank"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+        <TextView
+            android:id="@+id/tv_user_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/nav_line_2"
+            android:textColor="@color/xf_Grey100"
+            android:textSize="@dimen/xf_px_24" />
+
+    </LinearLayout>
+
 </LinearLayout>

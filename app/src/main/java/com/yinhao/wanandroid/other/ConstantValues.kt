@@ -14,7 +14,6 @@ class ConstantValues {
 
         const val BASE_URL = "https://www.wanandroid.com/"
 
-        const val PREF_NAME="wan_android"//TODO 放到pref类里
         const val USERNAME_KEY = "username"
         const val LOGIN_KEY = "login"
         const val PASSWORD_KEY = "password"

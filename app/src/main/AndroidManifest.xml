@@ -26,10 +26,10 @@
             android:value="portrait|landscape" />
 
         <activity
-            android:name=".ui.signon.SignOnActivity"
+            android:name=".ui.register.SignOnActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.signin.SignInActivity"
+            android:name=".ui.login.LoginActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.main.MainActivity"

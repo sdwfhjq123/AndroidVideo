@@ -9,7 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentWechatBinding
-import com.yinhao.wanandroid.logic.model.bean.WXChapterBean
+import com.yinhao.wanandroid.model.bean.WXChapterBean
 import com.yinhao.wanandroid.ui.fragment.knowledge.KnowledgeFragment
 
 /**

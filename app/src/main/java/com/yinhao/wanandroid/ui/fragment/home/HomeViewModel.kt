@@ -3,11 +3,11 @@ package com.yinhao.wanandroid.ui.fragment.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.bean.BannerBean
-import com.yinhao.wanandroid.logic.network.repository.HomeRepository
+import com.yinhao.wanandroid.model.bean.BannerBean
+import com.yinhao.wanandroid.network.repository.HomeRepository
 import com.yinhao.wanandroid.other.checkSuccess
-import com.yinhao.wanandroid.logic.model.Result
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
+import com.yinhao.wanandroid.model.Result
+import com.yinhao.wanandroid.model.bean.ArticleBean
 import kotlinx.coroutines.async
 
 /**
@@ -63,8 +63,8 @@ class HomeViewModel : BaseViewModel() {
                         isRefresh = true
                     )
 
-                } else if (result is Result.Error || topResult is Result.Error) {
-                    emitArticleUiState(showLoading = false, showError = "获取失败")
+                } else if (result is Result.Error) {
+                    emitArticleUiState(showLoading = false, showError = result.exception.message)
                 }
             } else {
                 if (result is Result.Success) {

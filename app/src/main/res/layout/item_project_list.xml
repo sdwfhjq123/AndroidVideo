@@ -39,7 +39,7 @@
                 android:maxLines="1"
                 android:text="@string/app_name"
                 android:textColor="@color/item_title"
-                android:textSize="@dimen/xf_px_32" />
+                android:textSize="@dimen/xf_px_25" />
 
             <TextView
                 android:id="@+id/item_project_list_content_tv"
@@ -51,7 +51,7 @@
                 android:maxLines="3"
                 android:text="@string/app_name"
                 android:textColor="@color/item_desc"
-                android:textSize="@dimen/xf_px_28" />
+                android:textSize="@dimen/xf_px_22" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                     android:layout_alignBaseline="@+id/item_project_list_time_tv"
                     android:text="@string/app_name"
                     android:textColor="@color/item_author"
-                    android:textSize="@dimen/xf_px_24" />
+                    android:textSize="@dimen/xf_px_20" />
 
                 <TextView
                     android:id="@+id/item_project_list_time_tv"
@@ -76,7 +76,7 @@
                     android:layout_marginBottom="@dimen/xf_px_16"
                     android:text="@string/app_name"
                     android:textColor="@color/item_date"
-                    android:textSize="@dimen/xf_px_24" />
+                    android:textSize="@dimen/xf_px_20" />
 
                 <ImageView
                     android:id="@+id/item_project_list_like_iv"

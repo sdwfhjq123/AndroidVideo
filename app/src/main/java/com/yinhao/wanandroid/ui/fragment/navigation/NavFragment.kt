@@ -10,8 +10,8 @@ import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.verticaltablayout.VerticalTabLayout
 import com.yinhao.verticaltablayout.widget.TabView
 import com.yinhao.wanandroid.databinding.FragmentNavBinding
-import com.yinhao.wanandroid.logic.model.bean.NavigationBean
-import org.jetbrains.anko.toast
+import com.yinhao.wanandroid.model.bean.NavigationBean
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * author:  yinhao
@@ -58,7 +58,7 @@ class NavFragment : BaseFragment<NavViewModel, FragmentNavBinding>() {
             }
             it.isError?.let { err ->
                 viewBinding?.multipleStatusView?.showError()
-                activity?.toast(err)
+                toast(err)
             }
         }
     }

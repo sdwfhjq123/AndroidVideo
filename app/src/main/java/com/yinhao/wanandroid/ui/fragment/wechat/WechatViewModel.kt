@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.bean.WXChapterBean
-import com.yinhao.wanandroid.logic.network.repository.WechatRepository
+import com.yinhao.wanandroid.model.bean.WXChapterBean
+import com.yinhao.wanandroid.network.repository.WechatRepository
 import com.yinhao.wanandroid.other.checkResult
 import kotlinx.coroutines.launch
 

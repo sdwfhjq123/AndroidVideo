@@ -9,7 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yinhao.commonmodule.base.base.BaseActivity
 import com.yinhao.wanandroid.databinding.ActivityKnowledgeBinding
-import com.yinhao.wanandroid.logic.model.bean.KnowledgeTreeBean
+import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 import com.yinhao.wanandroid.ui.fragment.knowledge.KnowledgeFragment
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.startActivity

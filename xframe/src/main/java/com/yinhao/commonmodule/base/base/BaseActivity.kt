@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.yinhao.commonmodule.R
+import com.yinhao.commonmodule.base.utils.Preference
 import org.jetbrains.anko.find
 
 /**
@@ -28,6 +29,8 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
     private var notSignedAlert: MaterialDialog? = null
     private var tokenOvertimeAlert: MaterialDialog? = null
     protected val viewModel by lazy { initViewModel() }
+
+    protected var prefIsLogin by Preference("LOGIN_KEY", false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +61,8 @@ abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
         find<View>(R.id.view_immersionbar)?.let {
             immersionBar {
                 fullScreen(true)
-                statusBarView(it)
                 keyboardEnable(true)
-                navigationBarEnable(false)
+                statusBarView(it)
             }
         }
     }

@@ -51,6 +51,8 @@ class App : Application() {
         instance = this
         Utils.init(this)
         initLiveEventBus()
+
+        MultiDex.install(this)
     }
 
     private fun initLiveEventBus() {

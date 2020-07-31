@@ -9,8 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentProjectBinding
-import com.yinhao.wanandroid.logic.model.bean.ProjectTreeBean
+import com.yinhao.wanandroid.model.bean.ProjectTreeBean
 import com.yinhao.wanandroid.ui.fragment.projectList.ProjectListFragment
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * author:  yinhao
@@ -43,6 +44,8 @@ class ProjectFragment : BaseFragment<ProjectViewModel, FragmentProjectBinding>()
                 mTabList = list!!
                 initTab()
             }
+
+            it.isError?.let { toast(it) }
         }
     }
 
@@ -55,7 +58,7 @@ class ProjectFragment : BaseFragment<ProjectViewModel, FragmentProjectBinding>()
                 }
 
                 override fun createFragment(position: Int): Fragment {
-                    return ProjectListFragment.newInstance(mTabList[position].courseId)
+                    return ProjectListFragment.newInstance(mTabList[position].id)
                 }
             }
         }

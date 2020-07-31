@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
-import com.yinhao.wanandroid.logic.network.repository.SquareRepository
+import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.network.repository.SquareRepository
 import com.yinhao.wanandroid.other.checkResult
 import kotlinx.coroutines.launch
 
@@ -32,6 +32,10 @@ class SquareViewModel : BaseViewModel() {
             val result = SquareRepository.getSquareList(pageNum)
             result.checkResult(
                 onSuccess = {
+                    if (it.offset >= it.total) {
+                        emitArticleUiState(showLoading = false, showEnd = true)
+                        return@checkResult
+                    }
                     pageNum++
                     emitArticleUiState(
                         showLoading = false,

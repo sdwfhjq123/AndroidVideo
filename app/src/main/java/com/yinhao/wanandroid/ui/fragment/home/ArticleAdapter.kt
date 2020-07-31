@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
+import com.yinhao.wanandroid.model.bean.ArticleBean
 
 /**
  * author:  yinhao

@@ -4,7 +4,7 @@ import android.text.Html
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.KnowledgeTreeBean
+import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 
 /**
  * author:  yinhao

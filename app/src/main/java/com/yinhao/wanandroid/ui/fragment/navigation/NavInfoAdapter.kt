@@ -4,8 +4,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.donkingliang.labels.LabelsView
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
-import com.yinhao.wanandroid.logic.model.bean.NavigationBean
+import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.model.bean.NavigationBean
 import org.jetbrains.anko.toast
 import team.fcma.xframe.others.XFrameCommonMethods
 

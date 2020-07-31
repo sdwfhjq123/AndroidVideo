@@ -2,12 +2,10 @@ package com.yinhao.wanandroid.ui.fragment.navigation
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yinhao.verticaltablayout.adapter.TabAdapter
 import com.yinhao.verticaltablayout.widget.ITabView
 import com.yinhao.wanandroid.R
-import com.yinhao.wanandroid.logic.model.bean.NavigationBean
+import com.yinhao.wanandroid.model.bean.NavigationBean
 
 /**
  * author:  yinhao

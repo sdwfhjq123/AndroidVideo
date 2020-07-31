@@ -1,6 +1,6 @@
 package com.yinhao.wanandroid.other
 
-import com.yinhao.wanandroid.logic.model.Result
+import com.yinhao.wanandroid.model.Result
 
 
 /**

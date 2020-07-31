@@ -10,9 +10,9 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentKnowTreeBinding
-import com.yinhao.wanandroid.logic.model.bean.KnowledgeTreeBean
+import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 import com.yinhao.wanandroid.ui.knowledge.KnowledgeActivity
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * author:  yinhao
@@ -58,7 +58,7 @@ class KnowTreeFragment : BaseFragment<KnowTreeViewModel, FragmentKnowTreeBinding
             }
 
             it.isError?.let { err ->
-                activity?.toast(err)
+                toast(err)
                 viewBinding?.multipleStatusView?.showError()
             }
         }

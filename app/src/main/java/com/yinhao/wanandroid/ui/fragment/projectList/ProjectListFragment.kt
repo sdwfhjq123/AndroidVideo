@@ -12,7 +12,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yinhao.commonmodule.base.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentProjectListBinding
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * author:  yinhao
@@ -74,7 +74,7 @@ class ProjectListFragment : BaseFragment<ProjectListViewModel, FragmentProjectLi
             if (it.showEnd) viewBinding?.refreshLayout?.finishLoadMoreWithNoMoreData()
 
             it.showError?.let { message ->
-                activity?.toast(if (message.isBlank()) "网络异常" else message)
+                toast(message)
                 viewBinding?.multipleStatusView?.showError()
             }
         }

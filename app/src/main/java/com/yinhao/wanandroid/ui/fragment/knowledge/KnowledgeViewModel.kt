@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
-import com.yinhao.wanandroid.logic.model.bean.ArticleBean
-import com.yinhao.wanandroid.logic.network.repository.WechatRepository
+import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.network.repository.WechatRepository
 import com.yinhao.wanandroid.other.checkResult
 import kotlinx.coroutines.launch
 
@@ -31,6 +31,10 @@ class KnowledgeViewModel : BaseViewModel() {
             val result = WechatRepository.getArticleHistoryByWx(id, pageNum)
             result.checkResult(
                 onSuccess = {
+                    if (it.offset >= it.total) {
+                        emitArticleUiState(showLoading = false, showEnd = true)
+                        return@checkResult
+                    }
                     pageNum++
                     emitArticleUiState(
                         showLoading = false,

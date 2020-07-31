@@ -1,7 +1,5 @@
 package com.yinhao.wanandroid.ui.main
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.widget.TextView
@@ -10,23 +8,30 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.yinhao.commonmodule.base.base.BaseActivity
+import com.yinhao.wanandroid.App
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityMainBinding
-import com.yinhao.wanandroid.other.ConstantValues
+import com.yinhao.wanandroid.db.entity.User
 import com.yinhao.wanandroid.ui.fragment.home.HomeFragment
 import com.yinhao.wanandroid.ui.fragment.system.SystemFragment
 import com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment
 import com.yinhao.wanandroid.ui.fragment.project.ProjectFragment
 import com.yinhao.wanandroid.ui.fragment.square.SquareFragment
-import com.yinhao.wanandroid.ui.signin.SignInActivity
+import com.yinhao.wanandroid.ui.login.LoginActivity
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
+//TODO 把navigation页面的功能实现，
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 
@@ -60,7 +65,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
 
         initFragment()
 
-        initNavView()
+        initNavView(null)
 
         viewObserver()
     }
@@ -86,22 +91,100 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
     private fun viewObserver() {
         LiveEventBus.get("login", Boolean::class.java)
             .observe(this, Observer {
-                Log.i("滴滴滴", it.toString())
+                if (it) {
+                    viewModel.getUser()
+                } else {
+                    initNavView(null)
+                }
             })
+
+        viewModel.user.observe(this) { user ->
+            initNavView(user)
+        }
     }
 
-    private fun initNavView() {
-        //navigationView的赋值
-        val usernameSp =
-            getSharedPreferences(ConstantValues.PREF_NAME, Context.MODE_PRIVATE).getString(
-                ConstantValues.USERNAME_KEY,
-                ""
-            )
-        val inflateHeaderView = viewBinding?.navView?.getHeaderView(0)
-        val tvUsername = inflateHeaderView?.find<TextView>(R.id.tv_username)
-        tvUsername?.text = usernameSp
-    }
+    private fun initNavView(user: User?) {
+        viewBinding?.navView?.run {
+            val navUsername = getHeaderView(0).find<TextView>(R.id.tv_username)
 
+            navUsername.let { username ->
+                username.text = if (prefIsLogin) user?.username else getString(R.string.go_login)
+                username.setOnClickListener {
+                    if (!prefIsLogin) {
+                        toast(getString(R.string.go_login))
+                        startActivity<LoginActivity>()
+                    }
+                }
+            }
+
+            menu.findItem(R.id.nav_logout).isVisible=prefIsLogin
+
+            setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.nav_score -> {
+//                        if (prefIsLogin) {
+//                            Intent(this@MainActivity, ScoreActivity::class.java).run {
+//                                startActivity(this)
+//                            }
+//                        } else {
+//                            showToast(resources.getString(R.string.login_tint))
+//                            goLogin()
+//                        }
+                    }
+                    R.id.nav_collect -> {
+//                        if (prefIsLogin) {
+//                            goCommonActivity(Constant.Type.COLLECT_TYPE_KEY)
+//                        } else {
+//                            showToast(resources.getString(R.string.login_tint))
+//                            goLogin()
+//                        }
+                    }
+                    R.id.nav_share -> {
+//                        if (prefIsLogin) {
+//                            startActivity(Intent(this, ShareActivity::class.java))
+//                        } else {
+//                            showToast(resources.getString(R.string.login_tint))
+//                            goLogin()
+//                        }
+                    }
+                    R.id.nav_setting -> {
+//                        Intent(this@MainActivity, SettingActivity::class.java).run {
+//                            // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
+//                            startActivity(this)
+//                        }
+                    }
+                    //R.id.nav_about_us -> {
+                    //    goCommonActivity(Constant.Type.ABOUT_US_TYPE_KEY)
+                    //}
+                    R.id.nav_logout -> {
+                        logout()
+                    }
+                    R.id.nav_night_mode -> {
+//                        if (SettingUtil.getIsNightMode()) {
+//                            SettingUtil.setIsNightMode(false)
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                        } else {
+//                            SettingUtil.setIsNightMode(true)
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                        }
+//                        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+//                        recreate()
+                    }
+                    R.id.nav_todo -> {
+//                        if (prefIsLogin) {
+//                            Intent(this@MainActivity, TodoActivity::class.java).run {
+//                                startActivity(this)
+//                            }
+//                        } else {
+//                            showToast(resources.getString(R.string.login_tint))
+//                            goLogin()
+//                        }
+                    }
+                }
+                true
+            }
+        }
+    }
 
     private fun initFragment() {
         viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
@@ -172,6 +255,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
         setToolbarMenu(mTabIndex)
         viewBinding?.viewPager?.setCurrentItem(position, false)
         return true
+    }
+
+    private fun logout() {
+        viewModel.logout()
+        PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.instance)).clear()
+        LiveEventBus.get("login", Boolean::class.java).post(false)
     }
 
 }
