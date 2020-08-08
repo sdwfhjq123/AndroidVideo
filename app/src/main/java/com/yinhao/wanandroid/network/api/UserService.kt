@@ -1,10 +1,11 @@
 package com.yinhao.wanandroid.network.api
 
 import com.yinhao.wanandroid.model.WanResponse
+import com.yinhao.wanandroid.model.bean.BaseListResponseBody
 import com.yinhao.wanandroid.model.bean.UserBean
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import com.yinhao.wanandroid.model.bean.UserInfoBody
+import com.yinhao.wanandroid.model.bean.UserScoreBean
+import retrofit2.http.*
 
 /**
  * author:  SHIGUANG
@@ -31,5 +32,12 @@ interface UserService {
         @Field("username") signName: String,
         @Field("password") password: String
     ): WanResponse<UserBean>
+
+    //获取积分列表
+    @GET("lg/coin/list/{page}/json")
+    suspend fun getUserScoreList(@Path("page") page: Int): WanResponse<BaseListResponseBody<UserScoreBean>>
+
+    @GET("lg/coin/userinfo/json")
+    suspend fun getUserScore(): WanResponse<UserInfoBody>
 
 }

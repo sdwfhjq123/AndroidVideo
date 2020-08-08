@@ -5,13 +5,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.yinhao.commonmodule.base.base.BaseActivity
+import com.yinhao.commonmodule.base.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivitySignOnBinding
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.toast
 import team.fcma.xframe.ex.click
 
-class SignOnActivity : BaseActivity<SignOnViewModel, ActivitySignOnBinding>(), ToolbarManager {
+class SignOnActivity : BaseVMActivity<SignOnViewModel, ActivitySignOnBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 
     override fun initViewModel(): SignOnViewModel =

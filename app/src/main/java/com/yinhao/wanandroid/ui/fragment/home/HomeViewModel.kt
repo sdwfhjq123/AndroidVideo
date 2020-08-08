@@ -8,6 +8,7 @@ import com.yinhao.wanandroid.network.repository.HomeRepository
 import com.yinhao.wanandroid.other.checkSuccess
 import com.yinhao.wanandroid.model.Result
 import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.utils.SettingUtil
 import kotlinx.coroutines.async
 
 /**
@@ -45,7 +46,7 @@ class HomeViewModel : BaseViewModel() {
             val deferred = async { HomeRepository.getArticleList(pageNum) }
             val result = deferred.await()
 
-            if (isRefresh) {
+            if (isRefresh && SettingUtil.getIsShowTopArticle()) {
                 val deferredTop = async { HomeRepository.getTopArticleList() }
                 val topResult = deferredTop.await()
 
@@ -76,9 +77,9 @@ class HomeViewModel : BaseViewModel() {
                     pageNum++
                     emitArticleUiState(
                         showLoading = false,
-                        showSuccess = articleList.datas
+                        showSuccess = articleList.datas,
+                        isRefresh = isRefresh
                     )
-
                 } else if (result is Result.Error) {
                     emitArticleUiState(showLoading = false, showError = result.exception.message)
                 }

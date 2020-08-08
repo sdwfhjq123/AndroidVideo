@@ -1,10 +1,13 @@
 package com.yinhao.wanandroid.ui.fragment.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -52,6 +55,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun viewModelObserver() {
+
+        LiveEventBus.get("switch_show_top", Boolean::class.java).observe(this, Observer {
+            viewModel.getArticleList(true)
+        })
+
+
         viewModel.bannerData.observe(this) {
             viewBinding!!.banner.setDatas(it).start()
         }

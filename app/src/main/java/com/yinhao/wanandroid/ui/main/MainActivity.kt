@@ -15,24 +15,28 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.yinhao.commonmodule.base.base.BaseActivity
+import com.yinhao.commonmodule.base.base.BaseVMActivity
 import com.yinhao.wanandroid.App
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.db.entity.User
+import com.yinhao.wanandroid.model.bean.UserInfoBody
+import com.yinhao.wanandroid.other.ConstantValues
+import com.yinhao.wanandroid.ui.common.CommonActivity
 import com.yinhao.wanandroid.ui.fragment.home.HomeFragment
 import com.yinhao.wanandroid.ui.fragment.system.SystemFragment
 import com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment
 import com.yinhao.wanandroid.ui.fragment.project.ProjectFragment
 import com.yinhao.wanandroid.ui.fragment.square.SquareFragment
 import com.yinhao.wanandroid.ui.login.LoginActivity
+import com.yinhao.wanandroid.ui.score.ScoreActivity
+import com.yinhao.wanandroid.ui.setting.SettingsActivity
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-//TODO 把navigation页面的功能实现，
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
+class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
 
     private val fragmentList = arrayListOf<Fragment>()
@@ -43,6 +47,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
     private val projectFragment by lazy { ProjectFragment() }
 
     private var mTabIndex = 0
+    private var userInfo: UserInfoBody? = null
+    private var user: User? = null
 
     init {
         fragmentList.add(homeFragment)
@@ -65,13 +71,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
 
         initFragment()
 
-        initNavView(null)
-
         viewObserver()
     }
 
     override fun initData() {
-
+        viewModel.getUser()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -94,21 +98,29 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
                 if (it) {
                     viewModel.getUser()
                 } else {
-                    initNavView(null)
+                    initNavView()
                 }
             })
 
         viewModel.user.observe(this) { user ->
-            initNavView(user)
+            this@MainActivity.user = user
+            initNavView()
+            viewModel.getUserScore()
+        }
+
+        viewModel.userScore.observe(this) { score ->
+            userInfo = score
+            initNavView()
         }
     }
 
-    private fun initNavView(user: User?) {
+    private fun initNavView() {
         viewBinding?.navView?.run {
             val navUsername = getHeaderView(0).find<TextView>(R.id.tv_username)
 
             navUsername.let { username ->
-                username.text = if (prefIsLogin) user?.username else getString(R.string.go_login)
+                username.text =
+                    if (prefIsLogin) user?.username else getString(R.string.go_login)
                 username.setOnClickListener {
                     if (!prefIsLogin) {
                         toast(getString(R.string.go_login))
@@ -117,27 +129,35 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
                 }
             }
 
-            menu.findItem(R.id.nav_logout).isVisible=prefIsLogin
+            val navUserGrade = getHeaderView(0).find<TextView>(R.id.tv_user_grade)
+            navUserGrade.let { grade ->
+                grade.text = "${userInfo?.coinCount ?: resources.getString(R.string.nav_line_2)}"
+            }
+
+            val navUserRank = getHeaderView(0).find<TextView>(R.id.tv_user_rank)
+            navUserRank.let { rank ->
+                rank.text = "${userInfo?.rank ?: resources.getString(R.string.nav_line_2)}"
+            }
+
+            menu.findItem(R.id.nav_logout).isVisible = prefIsLogin
 
             setNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.nav_score -> {
-//                        if (prefIsLogin) {
-//                            Intent(this@MainActivity, ScoreActivity::class.java).run {
-//                                startActivity(this)
-//                            }
-//                        } else {
-//                            showToast(resources.getString(R.string.login_tint))
-//                            goLogin()
-//                        }
+                        if (prefIsLogin) {
+                            startActivity<ScoreActivity>()
+                        } else {
+                            toast(resources.getString(R.string.go_login))
+                            startActivity<LoginActivity>()
+                        }
                     }
                     R.id.nav_collect -> {
-//                        if (prefIsLogin) {
-//                            goCommonActivity(Constant.Type.COLLECT_TYPE_KEY)
-//                        } else {
-//                            showToast(resources.getString(R.string.login_tint))
-//                            goLogin()
-//                        }
+                        if (prefIsLogin) {
+                            goCommonActivity(ConstantValues.Type.COLLECT_TYPE_KEY)
+                        } else {
+                            toast(resources.getString(R.string.go_login))
+                            startActivity<LoginActivity>()
+                        }
                     }
                     R.id.nav_share -> {
 //                        if (prefIsLogin) {
@@ -148,11 +168,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
 //                        }
                     }
                     R.id.nav_setting -> {
-//                        Intent(this@MainActivity, SettingActivity::class.java).run {
-//                            // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
-//                            startActivity(this)
-//                        }
-                    }
+                    startActivity<SettingsActivity>()
+                }
                     //R.id.nav_about_us -> {
                     //    goCommonActivity(Constant.Type.ABOUT_US_TYPE_KEY)
                     //}
@@ -261,6 +278,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Toolbar
         viewModel.logout()
         PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.instance)).clear()
         LiveEventBus.get("login", Boolean::class.java).post(false)
+    }
+
+    private fun goCommonActivity(type: String) {
+        startActivity<CommonActivity>(
+            CommonActivity.TYPE to type
+        )
     }
 
 }

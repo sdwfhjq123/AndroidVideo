@@ -9,6 +9,16 @@ import java.io.Serializable
  * ### description:
  */
 
+data class BaseListResponseBody<T>(
+    val curPage: Int,
+    val datas: List<T>,
+    val offset: Int,
+    val over: Boolean,
+    val pageCount: Int,
+    val size: Int,
+    val total: Int
+)
+
 /**
  * 文章
  */
@@ -125,4 +135,24 @@ data class ProjectTreeBean(
     val order: Int,
     val parentChapterId: Int,
     val visible: Int
+)
+
+// 个人积分实体
+data class UserScoreBean(
+    val coinCount: Int,
+    val date: Long,
+    val desc: String,
+    val id: Int,
+    val reason: String,
+    val type: Int,
+    val userId: Int,
+    val userName: String
+)
+
+// 用户个人信息
+data class UserInfoBody(
+    val coinCount: Int, // 总积分
+    val rank: Int, // 当前排名
+    val userId: Int,
+    val username: String
 )

@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.yinhao.commonmodule.base.base.BaseViewModel
 import com.yinhao.commonmodule.base.utils.Preference
 import com.yinhao.wanandroid.db.entity.User
+import com.yinhao.wanandroid.model.bean.UserInfoBody
 import com.yinhao.wanandroid.network.repository.UserRepository
+import com.yinhao.wanandroid.other.checkSuccess
 import kotlinx.coroutines.launch
 
 /**
@@ -17,6 +19,10 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel : BaseViewModel() {
 
+    private val _userScore = MutableLiveData<UserInfoBody>()
+    val userScore: LiveData<UserInfoBody>
+        get() = _userScore
+
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
@@ -25,12 +31,28 @@ class MainViewModel : BaseViewModel() {
         viewModelScope.launch {
             Preference.clearPreference()
             UserRepository.deleteUser()
+            _user.value = null
+            _userScore.value = null
         }
     }
 
     fun getUser() {
         viewModelScope.launch {
-            _user.value = UserRepository.getUser()[0]
+            val userList = UserRepository.getUser()
+            if (userList.isNullOrEmpty()) {
+                _user.value = null
+            } else {
+                _user.value = userList[0]
+            }
+        }
+    }
+
+    fun getUserScore() {
+        viewModelScope.launch {
+            val result = UserRepository.getUserScore()
+            result.checkSuccess {
+                _userScore.value = it
+            }
         }
     }
 }

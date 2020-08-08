@@ -3,7 +3,10 @@ package com.yinhao.wanandroid.network.repository
 import com.yinhao.wanandroid.db.AppDatabase
 import com.yinhao.wanandroid.db.entity.User
 import com.yinhao.wanandroid.model.Result
+import com.yinhao.wanandroid.model.bean.BaseListResponseBody
 import com.yinhao.wanandroid.model.bean.UserBean
+import com.yinhao.wanandroid.model.bean.UserInfoBody
+import com.yinhao.wanandroid.model.bean.UserScoreBean
 import com.yinhao.wanandroid.network.BaseRepository
 import com.yinhao.wanandroid.network.ServiceCreator
 import com.yinhao.wanandroid.network.api.UserService
@@ -25,8 +28,8 @@ object UserRepository : BaseRepository() {
         AppDatabase.getDatabase().userDao().insertUser(user)
     }
 
-    suspend fun deleteUser(){
-       return AppDatabase.getDatabase().userDao().deleteUser()
+    suspend fun deleteUser() {
+        return AppDatabase.getDatabase().userDao().deleteUser()
     }
 
     suspend fun getUser(): List<User> {
@@ -38,15 +41,19 @@ object UserRepository : BaseRepository() {
         password: String,
         repeatPwd: String
     ): Result<UserBean> {
-        return safeApiCall(
-            call = { requestSignOn(username, password, repeatPwd) }
-        )
+        return safeApiCall { requestSignOn(username, password, repeatPwd) }
     }
 
     suspend fun signIn(username: String, password: String): Result<UserBean> {
-        return safeApiCall(
-            call = { requestSignIn(username, password) }
-        )
+        return safeApiCall { requestSignIn(username, password) }
+    }
+
+    suspend fun getUserScoreList(page: Int): Result<BaseListResponseBody<UserScoreBean>> {
+        return safeApiCall { requestUserScoreList(page) }
+    }
+
+    suspend fun getUserScore(): Result<UserInfoBody> {
+        return safeApiCall { requestUserScore() }
     }
 
     private suspend fun requestSignOn(
@@ -63,6 +70,16 @@ object UserRepository : BaseRepository() {
         password: String
     ): Result<UserBean> {
         val response = userService.signIn(username, password)
+        return executeResponse(response)
+    }
+
+    private suspend fun requestUserScoreList(page: Int): Result<BaseListResponseBody<UserScoreBean>> {
+        val response = userService.getUserScoreList(page)
+        return executeResponse(response)
+    }
+
+    private suspend fun requestUserScore(): Result<UserInfoBody> {
+        val response = userService.getUserScore()
         return executeResponse(response)
     }
 }

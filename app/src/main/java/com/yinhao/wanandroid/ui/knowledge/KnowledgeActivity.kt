@@ -7,14 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.yinhao.commonmodule.base.base.BaseActivity
+import com.yinhao.commonmodule.base.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivityKnowledgeBinding
 import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 import com.yinhao.wanandroid.ui.fragment.knowledge.KnowledgeFragment
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.startActivity
 
-class KnowledgeActivity : BaseActivity<KnowledgeViewModel, ActivityKnowledgeBinding>(),
+class KnowledgeActivity : BaseVMActivity<KnowledgeViewModel, ActivityKnowledgeBinding>(),
     ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
     private val mTabList by lazy { intent.extras?.getSerializable(KEY_DATA) as KnowledgeTreeBean }

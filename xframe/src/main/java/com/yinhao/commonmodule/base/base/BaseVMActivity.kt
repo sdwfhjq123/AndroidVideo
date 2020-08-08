@@ -20,7 +20,7 @@ import org.jetbrains.anko.find
  * ### description:
  */
 
-abstract class BaseActivity<M : BaseViewModel, B : ViewBinding>
+abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
     : AppCompatActivity(), ViewBindingProxy<B> by ViewBindingDelegate<B>() {
 
     open var barDarkMode = false

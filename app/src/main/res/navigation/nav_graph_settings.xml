@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/settings_fragment">
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.setting.SettingsFragment"
+        android:label="@string/setting">
+
+        <action
+            android:id="@+id/action_go_to_auto_night_fragment"
+            app:destination="@id/auto_night_fragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/auto_night_fragment"
+        android:name="com.yinhao.wanandroid.ui.fragment.setting.AutoNightFragment"
+        android:label="@string/setting">
+
+    </fragment>
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/projectFragment"-->
+    <!--        android:name="com.yinhao.wanandroid.ui.fragment.project.ProjectFragment"-->
+    <!--        android:label="@string/bottom_nav_project"-->
+    <!--        tools:layout="@layout/fragment_project">-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_projectFragment_to_navFragment"-->
+    <!--            app:destination="@id/navFragment" />-->
+    <!--    </fragment>-->
+</navigation>

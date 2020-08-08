@@ -5,7 +5,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.yinhao.commonmodule.base.base.BaseActivity
+import com.yinhao.commonmodule.base.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivityLoginBinding
 import com.yinhao.wanandroid.ui.register.SignOnActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -13,7 +13,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import team.fcma.xframe.ex.click
 
-class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
+class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun initViewModel(): LoginViewModel =
         ViewModelProvider(this).get(LoginViewModel::class.java)
