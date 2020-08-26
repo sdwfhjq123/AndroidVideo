@@ -6,6 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.yinhao.wanandroid.R
+import com.yinhao.wanandroid.ui.setting.SettingsActivity
 import com.yinhao.wanandroid.utils.SettingUtil
 
 /**
@@ -29,8 +30,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("auto_nightMode")!!.setOnPreferenceClickListener {
-//            Navigation.findNavController(it.layoutResource).navigate(R.id.action_go_to_auto_night_fragment)
-            addPreferencesFromResource(R.xml.autonight_preferences)
+            (context as SettingsActivity).startWithFragment(AutoNightFragment::class.java.name)
             true
         }
 

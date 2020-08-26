@@ -18,7 +18,7 @@ android {
     }
 
     //资源前缀
-    resourcePrefix "xf_"
+//    resourcePrefix "xf_"
 
     dexOptions {
         preDexLibraries true

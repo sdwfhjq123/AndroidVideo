@@ -15,6 +15,8 @@
     <string name="item_tab_system">体系</string>
     <string name="item_tab_nav">导航</string>
     <string name="bottom_nav_project">项目</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="menu_search">搜索</string>
     <string name="menu_share">分享</string>
@@ -61,7 +63,6 @@
     <string name="share_article_delete">已删除分享的文章</string>
     <string name="audited">待审核</string>
     <string name="submit_ing">正在提交...</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- AboutUs -->
     <string name="about_us">关于我们</string>

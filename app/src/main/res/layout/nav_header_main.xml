@@ -26,7 +26,7 @@
         android:layout_height="@dimen/xf_px_160"
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_default_avatar"
-        app:civ_border_color="@android:color/white"
+        app:civ_border_color="@color/White"
         app:civ_border_width="2dp" />
 
     <TextView
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nav_id"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nav_line_4"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
     </LinearLayout>
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/nav_grade"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
         <TextView
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/nav_line_2"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
         <TextView
@@ -96,7 +96,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/xf_px_16"
             android:text="@string/nav_rank"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/nav_line_2"
-            android:textColor="@color/xf_Grey100"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/xf_px_24" />
 
     </LinearLayout>

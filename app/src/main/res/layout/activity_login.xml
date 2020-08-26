@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:background="@android:color/white" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -65,7 +65,7 @@
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_in"
         android:layout_width="match_parent"
         android:layout_height="@dimen/xf_px_100"
@@ -75,7 +75,7 @@
         android:enabled="false"
         android:text="@string/btn_login" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sign_on"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

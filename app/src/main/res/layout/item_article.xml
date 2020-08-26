@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="@color/viewBackground"
     app:cardCornerRadius="@dimen/xf_px_3"
     app:cardElevation="@dimen/xf_px_3">
 
@@ -30,7 +30,7 @@
             android:paddingEnd="@dimen/xf_px_9"
             android:paddingBottom="@dimen/xf_px_5"
             android:text="@string/item_top_tip"
-            android:textColor="@color/xf_Red"
+            android:textColor="@color/Red"
             android:textSize="@dimen/xf_px_21"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -47,7 +47,7 @@
             android:paddingEnd="@dimen/xf_px_9"
             android:paddingBottom="@dimen/xf_px_5"
             android:text="@string/item_the_newest"
-            android:textColor="@color/xf_Red"
+            android:textColor="@color/Red"
             android:textSize="@dimen/xf_px_21"
             android:visibility="gone"
             tools:visibility="visible" />

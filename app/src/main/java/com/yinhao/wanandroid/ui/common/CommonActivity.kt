@@ -14,7 +14,7 @@ import com.yinhao.wanandroid.widget.ToolbarManager
 import kotlinx.android.synthetic.main.activity_common.view.*
 
 class CommonActivity : BaseVMActivity<CommonModel, ActivityCommonBinding>(), ToolbarManager {
-    override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
+    override val toolbar: Toolbar by lazy { viewBinding!!.appbar.toolbar }
 
     companion object {
         const val TYPE = "com.yinhao.wanandroid.ui.common.CommonActivity.type"

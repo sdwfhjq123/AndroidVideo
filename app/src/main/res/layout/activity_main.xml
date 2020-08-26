@@ -12,37 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="top"
-        android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <!--        tools:openDrawer="start"-->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                app:elevation="0dp">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlways|snap"
-                    tools:title="@string/app_name" />
-            </com.google.android.material.appbar.AppBarLayout>
+            <include
+                android:id="@+id/appbar"
+                layout="@layout/toolbar" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -50,11 +40,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:layout_gravity="bottom"
-                android:background="@android:color/white"
+                android:background="@color/viewBackground"
                 app:elevation="@dimen/xf_px_16"
                 app:itemIconSize="@dimen/xf_px_50"
-                app:itemIconTint="@drawable/style_color_main_bottom_navigation"
-                app:itemTextColor="@drawable/style_color_main_bottom_navigation"
+                app:itemIconTint="@drawable/selector_color_main_bottom_navigation"
+                app:itemTextColor="@drawable/selector_color_main_bottom_navigation"
                 app:labelVisibilityMode="labeled"
                 app:layout_behavior=".widget.behavior.BottomNavigationBehavior"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -69,6 +59,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_header_main"
+            app:itemIconTint="@color/item_nav_color_tv"
+            app:itemTextColor="@color/item_nav_color_tv"
             app:menu="@menu/activity_main_drawer" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

@@ -14,6 +14,6 @@
         android:paddingRight="@dimen/dp_10"
         android:paddingTop="@dimen/dp_4"
         android:text="@string/xf_network_unavailable_tip"
-        android:textColor="@color/xf_Red" />
+        android:textColor="#f00" />
 
 </RelativeLayout>

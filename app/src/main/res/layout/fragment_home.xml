@@ -5,6 +5,7 @@
     android:id="@+id/multiple_status_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/viewBackground"
     app:emptyView="@layout/xf_layout_empty_view"
     app:errorView="@layout/xf_layout_error_view"
     app:loadingView="@layout/xf_layout_loading_view"

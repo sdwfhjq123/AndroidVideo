@@ -2,6 +2,7 @@ package com.yinhao.wanandroid
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.blankj.utilcode.util.Utils
 import com.bumptech.glide.Glide
@@ -9,6 +10,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.yinhao.commonmodule.base.utils.Preference
 
 
 /**
@@ -19,6 +21,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  */
 
 class App : Application() {
+    private val nightModePref by Preference<Boolean>("getIsNightMode", false)
 
     companion object {
         @JvmStatic
@@ -33,7 +36,7 @@ class App : Application() {
                 //全局设置主题颜色
                 layout.setPrimaryColorsId(
                     R.color.colorPrimary,
-                    android.R.color.white
+                    R.color.White
                 )
                 //.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
                 ClassicsHeader(context)
@@ -53,6 +56,12 @@ class App : Application() {
         initLiveEventBus()
 
         MultiDex.install(this)
+
+        if (nightModePref) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     private fun initLiveEventBus() {

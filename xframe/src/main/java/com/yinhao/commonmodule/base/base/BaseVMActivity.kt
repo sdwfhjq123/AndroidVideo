@@ -6,13 +6,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.blankj.utilcode.util.ActivityUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.yinhao.commonmodule.R
 import com.yinhao.commonmodule.base.utils.Preference
 import org.jetbrains.anko.find
-
 /**
  * author:  yinhao
  * date:    2020/4/2
@@ -27,6 +27,7 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
     private var waitingView: KProgressHUD? = null
     private var noNetworkAlert: MaterialDialog? = null
     private var notSignedAlert: MaterialDialog? = null
+    private var isLogoutAlert: MaterialDialog? = null
     private var tokenOvertimeAlert: MaterialDialog? = null
     protected val viewModel by lazy { initViewModel() }
 
@@ -50,6 +51,7 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
         noNetworkAlert = null
         notSignedAlert = null
         tokenOvertimeAlert = null
+        isLogoutAlert = null
         super.onDestroy()
         ActivityUtils.getActivityList().remove(this)
     }
@@ -58,7 +60,7 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
      * ### 设置statusBar
      */
     private fun setupStatusBar() {
-        find<View>(R.id.view_immersionbar)?.let {
+        find<View>(R.id.view_immersionbar).let {
             immersionBar {
                 fullScreen(true)
                 keyboardEnable(true)
@@ -79,6 +81,41 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
             .setAnimationSpeed(2)
             .setDimAmount(0.5f))
         return waitingView!!
+    }
+
+    /**
+     * ### 获取没有登录的提示框
+     */
+    protected fun getNotSignedAlert(block: () -> Unit): MaterialDialog {
+        notSignedAlert?.dismiss()
+        notSignedAlert = notSignedAlert ?: (MaterialDialog(this)
+            .lifecycleOwner(this)
+            .title(res = R.string.notSigned)
+            .message(res = R.string.notSigned_content)
+            .negativeButton(R.string.cancel) { it.dismiss() }
+            .positiveButton(R.string.goSignIn) {
+                it.dismiss()
+                block()
+            })
+        return notSignedAlert!!
+    }
+
+    /**
+     * ### 获取没有登录的提示框
+     */
+    protected fun getIsLogoutAlert(block: () -> Unit): MaterialDialog {
+        isLogoutAlert?.dismiss()
+        isLogoutAlert = isLogoutAlert ?: (MaterialDialog(this)
+            .lifecycleOwner(this)
+            .title(res = R.string.notSigned)
+            .icon(R.drawable.xf_ic_empty)
+            .message(text = "是否选择退出，退出后部分功能将无法使用")
+            .negativeButton(R.string.cancel) { it.dismiss() }
+            .positiveButton(R.string.exit) {
+                it.dismiss()
+                block()
+            })
+        return isLogoutAlert!!
     }
 
     /**

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/xf_px_20"
         app:isIndicator="true"
-        app:labelBackground="@color/xf_Grey300"
+        app:labelBackground="@color/Grey300"
         app:labelTextPaddingBottom="@dimen/xf_px_20"
         app:labelTextPaddingLeft="@dimen/xf_px_20"
         app:labelTextPaddingRight="@dimen/xf_px_20"

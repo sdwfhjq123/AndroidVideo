@@ -12,11 +12,10 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent" />
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/LightToolbar"
         app:title="@string/btn_register" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -25,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/xf_px_30"
         android:layout_marginTop="@dimen/xf_px_20"
-
         android:layout_marginEnd="@dimen/xf_px_30">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,7 +84,7 @@
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_on"
         android:layout_width="match_parent"
         android:layout_height="@dimen/xf_px_100"

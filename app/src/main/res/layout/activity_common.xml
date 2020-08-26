@@ -11,16 +11,12 @@
         android:id="@+id/view_immersionbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary" />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="top"
         android:background="@color/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlways"
-        tools:title="@string/app_name" />
+        android:fitsSystemWindows="true" />
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"

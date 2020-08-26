@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,13 +32,14 @@ import com.yinhao.wanandroid.ui.fragment.square.SquareFragment
 import com.yinhao.wanandroid.ui.login.LoginActivity
 import com.yinhao.wanandroid.ui.score.ScoreActivity
 import com.yinhao.wanandroid.ui.setting.SettingsActivity
-import com.yinhao.wanandroid.widget.ToolbarManager
+import com.yinhao.wanandroid.utils.SettingUtil
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), ToolbarManager {
-    override val toolbar: Toolbar by lazy { viewBinding!!.toolbar }
+//TODO 把颜色xml和其他项目同步
+class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
+    private val toolbar: Toolbar by lazy { viewBinding!!.appbar.toolbar }
 
     private val fragmentList = arrayListOf<Fragment>()
     private val homeFragment by lazy { HomeFragment() }
@@ -83,15 +85,6 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
         return super.onCreateOptionsMenu(menu)
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-//        menu.clear()
-//        when (mTabIndex) {
-//            1 -> menuInflater.inflate(R.menu.menu_square, menu)
-//            else -> menuInflater.inflate(R.menu.menu_home, menu)
-//        }
-//        return super.onPrepareOptionsMenu(menu)
-//    }
-
     private fun viewObserver() {
         LiveEventBus.get("login", Boolean::class.java)
             .observe(this, Observer {
@@ -105,7 +98,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
         viewModel.user.observe(this) { user ->
             this@MainActivity.user = user
             initNavView()
-            viewModel.getUserScore()
+            if (this@MainActivity.user != null) viewModel.getUserScore()
         }
 
         viewModel.userScore.observe(this) { score ->
@@ -144,48 +137,34 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
             setNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.nav_score -> {
-                        if (prefIsLogin) {
-                            startActivity<ScoreActivity>()
-                        } else {
-                            toast(resources.getString(R.string.go_login))
-                            startActivity<LoginActivity>()
-                        }
+                        goLogin { startActivity<ScoreActivity>() }
                     }
                     R.id.nav_collect -> {
-                        if (prefIsLogin) {
-                            goCommonActivity(ConstantValues.Type.COLLECT_TYPE_KEY)
-                        } else {
-                            toast(resources.getString(R.string.go_login))
-                            startActivity<LoginActivity>()
-                        }
+                        goLogin { goCommonActivity(ConstantValues.Type.COLLECT_TYPE_KEY) }
                     }
                     R.id.nav_share -> {
-//                        if (prefIsLogin) {
-//                            startActivity(Intent(this, ShareActivity::class.java))
-//                        } else {
-//                            showToast(resources.getString(R.string.login_tint))
-//                            goLogin()
-//                        }
+                        goLogin { goCommonActivity(ConstantValues.Type.COLLECT_TYPE_KEY) }
                     }
                     R.id.nav_setting -> {
-                    startActivity<SettingsActivity>()
-                }
+                        startActivity<SettingsActivity>()
+                    }
                     //R.id.nav_about_us -> {
                     //    goCommonActivity(Constant.Type.ABOUT_US_TYPE_KEY)
                     //}
                     R.id.nav_logout -> {
-                        logout()
+                        getIsLogoutAlert { logout() }.show()
+
                     }
                     R.id.nav_night_mode -> {
-//                        if (SettingUtil.getIsNightMode()) {
-//                            SettingUtil.setIsNightMode(false)
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                        } else {
-//                            SettingUtil.setIsNightMode(true)
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                        }
-//                        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-//                        recreate()
+                        if (SettingUtil.getIsNightMode()) {
+                            SettingUtil.setIsNightMode(false)
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        } else {
+                            SettingUtil.setIsNightMode(true)
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        }
+                        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+                        recreate()
                     }
                     R.id.nav_todo -> {
 //                        if (prefIsLogin) {
@@ -208,18 +187,23 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        enableHomeAsUp(0f) {
-            viewBinding?.drawerLayout?.open()
+        toolbar.run {
+            title = getString(R.string.app_name)
+            setSupportActionBar(this)
         }
-        enableMenu()
 
-        val toggle = ActionBarDrawerToggle(
-            this, viewBinding?.drawerLayout, toolbar,
-            R.string.app_name, R.string.app_name
-        )
-        toggle.syncState()
-        viewBinding?.drawerLayout?.addDrawerListener(toggle)
+        viewBinding?.drawerLayout?.run {
+            val toggle = ActionBarDrawerToggle(
+                this@MainActivity,
+                this,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+            )
+            addDrawerListener(toggle)
+            toggle.syncState()
+        }
+
     }
 
     private fun initViewPager() {
@@ -232,30 +216,24 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
                 override fun getItemCount() = fragmentList.size
             }
         }
-
     }
 
     private val onNavigationItemSelected = BottomNavigationView.OnNavigationItemSelectedListener {
         when (it.itemId) {
             R.id.nav_home -> {
                 switchFragment(0)
-                toolbarTitle = getString(R.string.app_name)
             }
             R.id.nav_square -> {
                 switchFragment(1)
-                toolbarTitle = getString(R.string.bottom_nav_square)
             }
             R.id.nav_wechat -> {
                 switchFragment(2)
-                toolbarTitle = getString(R.string.bottom_nav_wechat)
             }
             R.id.nav_system -> {
                 switchFragment(3)
-                toolbarTitle = getString(R.string.bottom_nav_system)
             }
             R.id.nav_project -> {
                 switchFragment(4)
-                toolbarTitle = getString(R.string.bottom_nav_project)
             }
         }
         true
@@ -263,15 +241,28 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>(), Toolb
 
     private fun switchFragment(position: Int): Boolean {
         mTabIndex = position
-//        invalidateOptionsMenu()
-//        if (mTabIndex == 1) {
-//            enableMenu(R.menu.menu_square)
-//        } else {
-//            enableMenu(R.menu.menu_home)
-//        }
-        setToolbarMenu(mTabIndex)
         viewBinding?.viewPager?.setCurrentItem(position, false)
+
+        when (position) {
+            0 -> toolbar.title = getString(R.string.app_name)
+            1 -> toolbar.title = getString(R.string.bottom_nav_square)
+            2 -> toolbar.title = getString(R.string.bottom_nav_wechat)
+            3 -> toolbar.title = getString(R.string.bottom_nav_system)
+            4 -> toolbar.title = getString(R.string.bottom_nav_project)
+        }
+
         return true
+    }
+
+    private fun goLogin(block: (() -> Unit)?) {
+        if (prefIsLogin) {
+            block?.invoke()
+        } else {
+            getNotSignedAlert {
+                toast(resources.getString(R.string.go_login))
+                startActivity<LoginActivity>()
+            }.show()
+        }
     }
 
     private fun logout() {

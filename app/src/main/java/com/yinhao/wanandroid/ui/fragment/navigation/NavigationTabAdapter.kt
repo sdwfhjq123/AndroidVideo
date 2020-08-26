@@ -33,7 +33,7 @@ class NavigationTabAdapter(context: Context?, list: List<NavigationBean>) : TabA
             .setContent(list[position].name)
             .setTextColor(
                 ContextCompat.getColor(context, R.color.colorAccent),
-                ContextCompat.getColor(context, R.color.xf_Grey500)
+                ContextCompat.getColor(context, R.color.Grey500)
             )
             .build()
     }
