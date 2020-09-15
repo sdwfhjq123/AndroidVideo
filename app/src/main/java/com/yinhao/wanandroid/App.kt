@@ -19,7 +19,7 @@ import com.yinhao.commonmodule.base.utils.Preference
  * version: v1.0
  * ### description:
  */
-
+//TODO 动态切换style
 class App : Application() {
     private val nightModePref by Preference<Boolean>("getIsNightMode", false)
 
@@ -58,10 +58,13 @@ class App : Application() {
         MultiDex.install(this)
 
         if (nightModePref) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        } else {
+            //此方法可以使主题跟随系统，具体业务逻辑在项目中实现即可
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
     }
 
     private fun initLiveEventBus() {

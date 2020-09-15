@@ -3,15 +3,11 @@ package com.yinhao.wanandroid.ui.common
 import android.view.LayoutInflater
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavGraph
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityCommonBinding
 import com.yinhao.wanandroid.ui.fragment.collection.CollectionFragment
 import com.yinhao.wanandroid.widget.ToolbarManager
-import kotlinx.android.synthetic.main.activity_common.view.*
 
 class CommonActivity : BaseVMActivity<CommonModel, ActivityCommonBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.appbar.toolbar }

@@ -31,7 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
-                android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 tools:title="@string/app_name" />
 

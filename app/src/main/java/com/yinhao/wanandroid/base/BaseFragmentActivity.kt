@@ -1,4 +1,4 @@
-package com.yinhao.commonmodule.base.base
+package com.yinhao.wanandroid.base
 
 import android.content.Context
 import android.os.Bundle
@@ -9,13 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.NetworkUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.yinhao.commonmodule.R
+import com.yinhao.commonmodule.base.base.BaseViewModel
+import com.yinhao.commonmodule.base.base.ViewBindingDelegate
+import com.yinhao.commonmodule.base.base.ViewBindingProxy
 import com.yinhao.commonmodule.base.repository.livedata.holder.WaitingHolder
 import com.yinhao.commonmodule.base.others.XFConstants
 import team.fcma.xframe.others.XFrameCommonMethods

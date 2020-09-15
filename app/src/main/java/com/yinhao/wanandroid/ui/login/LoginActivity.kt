@@ -5,8 +5,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivityLoginBinding
+import com.yinhao.wanandroid.event.LoginEvent
 import com.yinhao.wanandroid.ui.register.SignOnActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
@@ -57,7 +58,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
                     prefIsLogin = true
                     hideWaitingView()
                     toast("登录成功")
-                    LiveEventBus.get("login").post(true)
+                    LiveEventBus.get("login").post(LoginEvent(true))
                     finish()
                 }
                 it.isError?.let { err ->

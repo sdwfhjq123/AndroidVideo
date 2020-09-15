@@ -117,6 +117,7 @@ dependencies {
     api "com.afollestad.material-dialogs:datetime:3.1.1"
     api "com.afollestad.material-dialogs:lifecycle:3.1.1"
     api "com.afollestad.material-dialogs:bottomsheets:3.1.1"
+    api 'com.afollestad.material-dialogs:color:3.3.0'
     api 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
     api 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1"

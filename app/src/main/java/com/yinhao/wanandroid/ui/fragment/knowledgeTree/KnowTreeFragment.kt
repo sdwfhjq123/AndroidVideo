@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentKnowTreeBinding
 import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 import com.yinhao.wanandroid.ui.knowledge.KnowledgeActivity

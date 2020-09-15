@@ -16,11 +16,12 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.App
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.db.entity.User
+import com.yinhao.wanandroid.event.LoginEvent
 import com.yinhao.wanandroid.model.bean.UserInfoBody
 import com.yinhao.wanandroid.other.ConstantValues
 import com.yinhao.wanandroid.ui.common.CommonActivity
@@ -86,9 +87,9 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun viewObserver() {
-        LiveEventBus.get("login", Boolean::class.java)
+        LiveEventBus.get("login", LoginEvent::class.java)
             .observe(this, Observer {
-                if (it) {
+                if (it.isLogin) {
                     viewModel.getUser()
                 } else {
                     initNavView()

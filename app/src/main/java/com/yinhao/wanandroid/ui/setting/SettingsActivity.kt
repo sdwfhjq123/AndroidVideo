@@ -8,11 +8,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.FragmentTransaction
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import androidx.lifecycle.Observer
+import com.jeremyliao.liveeventbus.LiveEventBus
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.commonmodule.base.base.BaseViewModel
 import com.yinhao.wanandroid.R
 import com.yinhao.wanandroid.databinding.ActivitySettingsBinding
+import com.yinhao.wanandroid.event.ColorEvent
 import com.yinhao.wanandroid.ui.fragment.setting.SettingsFragment
+import com.yinhao.wanandroid.utils.SettingUtil
 import com.yinhao.wanandroid.widget.ToolbarManager
 
 class SettingsActivity : BaseVMActivity<BaseViewModel, ActivitySettingsBinding>(), ToolbarManager {
@@ -47,7 +51,11 @@ class SettingsActivity : BaseVMActivity<BaseViewModel, ActivitySettingsBinding>(
     }
 
     override fun initData() {
-
+        LiveEventBus.get("color_changed", ColorEvent::class.java).observe(this, Observer {
+            if (it.isRefresh) {
+                initColor()
+            }
+        })
     }
 
     private fun setupFragment(fragmentName: String, args: Bundle) {

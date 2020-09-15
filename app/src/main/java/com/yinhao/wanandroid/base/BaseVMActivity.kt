@@ -1,5 +1,8 @@
-package com.yinhao.commonmodule.base.base
+package com.yinhao.wanandroid.base
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +13,15 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.blankj.utilcode.util.ActivityUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kaopiz.kprogresshud.KProgressHUD
-import com.yinhao.commonmodule.R
+import com.yinhao.commonmodule.base.base.BaseViewModel
+import com.yinhao.commonmodule.base.base.ViewBindingDelegate
+import com.yinhao.commonmodule.base.base.ViewBindingProxy
 import com.yinhao.commonmodule.base.utils.Preference
+import com.yinhao.wanandroid.R
+import com.yinhao.wanandroid.utils.SettingUtil
+import com.yinhao.wanandroid.utils.StatusBarUtil
 import org.jetbrains.anko.find
+
 /**
  * author:  yinhao
  * date:    2020/4/2
@@ -32,6 +41,11 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
     protected val viewModel by lazy { initViewModel() }
 
     protected var prefIsLogin by Preference("LOGIN_KEY", false)
+
+    /**
+     * theme color
+     */
+    protected var mThemeColor = SettingUtil.getColor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,6 +137,24 @@ abstract class BaseVMActivity<M : BaseViewModel, B : ViewBinding>
      */
     protected fun hideWaitingView() {
         waitingView?.dismiss()
+    }
+
+    open fun initColor() {
+        mThemeColor = if (!SettingUtil.getIsNightMode()) {
+            SettingUtil.getColor()
+        } else {
+            getColor(R.color.colorPrimary)
+        }
+        StatusBarUtil.setColor(this, mThemeColor, 0)
+        if (this.supportActionBar != null) {
+            this.supportActionBar?.setBackgroundDrawable(ColorDrawable(mThemeColor))
+        }
+
+        if (SettingUtil.getNavBar()) {
+            window.navigationBarColor = mThemeColor
+        } else {
+            window.navigationBarColor = Color.BLACK
+        }
     }
 
     /**

@@ -5,7 +5,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivitySignOnBinding
 import com.yinhao.wanandroid.widget.ToolbarManager
 import org.jetbrains.anko.toast

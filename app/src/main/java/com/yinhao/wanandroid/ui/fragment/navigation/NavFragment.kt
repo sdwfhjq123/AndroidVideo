@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.base.BaseFragment
 import com.yinhao.verticaltablayout.VerticalTabLayout
 import com.yinhao.verticaltablayout.widget.TabView
 import com.yinhao.wanandroid.databinding.FragmentNavBinding

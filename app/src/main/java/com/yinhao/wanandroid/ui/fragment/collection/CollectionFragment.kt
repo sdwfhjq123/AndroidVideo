@@ -3,7 +3,7 @@ package com.yinhao.wanandroid.ui.fragment.collection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentCollectionBinding
 
 /**

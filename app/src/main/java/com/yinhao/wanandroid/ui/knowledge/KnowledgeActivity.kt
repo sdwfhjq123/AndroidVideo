@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.yinhao.commonmodule.base.base.BaseVMActivity
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivityKnowledgeBinding
 import com.yinhao.wanandroid.model.bean.KnowledgeTreeBean
 import com.yinhao.wanandroid.ui.fragment.knowledge.KnowledgeFragment

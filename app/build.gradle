@@ -62,4 +62,5 @@ dependencies {
     implementation 'com.youth.banner:banner:2.0.12'
     implementation 'com.github.donkingliang:LabelsView:1.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.just.agentweb:agentweb-androidx:4.1.4' // (必选)
 }

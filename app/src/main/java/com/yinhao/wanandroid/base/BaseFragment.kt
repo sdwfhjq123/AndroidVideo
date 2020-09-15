@@ -1,13 +1,15 @@
-package com.yinhao.commonmodule.base.base
+package com.yinhao.wanandroid.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yinhao.commonmodule.base.base.BaseViewModel
+import com.yinhao.commonmodule.base.base.ViewBindingDelegate
+import com.yinhao.commonmodule.base.base.ViewBindingProxy
 import com.yinhao.commonmodule.base.utils.Preference
 
 /**

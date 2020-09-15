@@ -2,7 +2,6 @@ package com.yinhao.wanandroid.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.yinhao.wanandroid.R

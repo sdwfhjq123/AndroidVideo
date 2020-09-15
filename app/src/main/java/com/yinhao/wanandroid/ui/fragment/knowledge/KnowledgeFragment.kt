@@ -10,8 +10,10 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentKnowledgeBinding
+import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.ui.content.ContentActivity
 import com.yinhao.wanandroid.ui.fragment.home.ArticleAdapter
 import org.jetbrains.anko.toast
 
@@ -50,6 +52,13 @@ class KnowledgeFragment : BaseFragment<KnowledgeViewModel, FragmentKnowledgeBind
         initRecyclerView()
         initRefresh()
         viewObserver()
+
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            if (adapter.data.size != 0) {
+                val data = adapter.data[position] as ArticleBean
+                ContentActivity.actionStart(activity, data.id, data.title, data.link)
+            }
+        }
     }
 
     override fun initData() {

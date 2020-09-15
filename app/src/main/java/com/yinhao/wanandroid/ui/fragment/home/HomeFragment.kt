@@ -1,6 +1,5 @@
 package com.yinhao.wanandroid.ui.fragment.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
@@ -12,9 +11,13 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import com.yinhao.commonmodule.base.base.BaseFragment
+import com.yinhao.wanandroid.base.BaseFragment
 import com.yinhao.wanandroid.databinding.FragmentHomeBinding
+import com.yinhao.wanandroid.model.bean.ArticleBean
+import com.yinhao.wanandroid.model.bean.BannerBean
+import com.yinhao.wanandroid.ui.content.ContentActivity
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import org.jetbrains.anko.toast
 
 /**
@@ -52,10 +55,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             layoutManager = LinearLayoutManager(activity)
             adapter = mAdapter
         }
+
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            if (adapter.data.size != 0) {
+                val data = adapter.data[position] as ArticleBean
+                ContentActivity.actionStart(activity, data.id, data.title, data.link)
+            }
+        }
     }
 
     private fun viewModelObserver() {
-
         LiveEventBus.get("switch_show_top", Boolean::class.java).observe(this, Observer {
             viewModel.getArticleList(true)
         })
@@ -108,6 +117,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun initBanner() {
         viewBinding!!.banner.addBannerLifecycleObserver(activity)//添加生命周期观察者
             .setAdapter(ImageAdapter(null)).indicator = CircleIndicator(activity)
+
+        viewBinding.banner.setOnBannerListener { data: Any?, position: Int ->
+            val bean = data as BannerBean
+            ContentActivity.actionStart(activity, bean.id.toInt(), bean.desc, bean.url)
+        }
     }
 
 }
