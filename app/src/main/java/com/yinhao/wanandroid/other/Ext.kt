@@ -33,14 +33,14 @@ fun String.getAgentWeb(
     webContent: ViewGroup,
     layoutParams: ViewGroup.LayoutParams,
     webView: WebView,
-    webViewClient: WebViewClient?,
-    webChromeClient: WebChromeClient?,
+    webViewClient: com.just.agentweb.WebViewClient?,
+//    webChromeClient: com.just.agentweb.WebChromeClient?,
     indicatorColor: Int
 ): AgentWeb = AgentWeb.with(activity)//传入Activity or Fragment
     .setAgentWebParent(webContent, 1, layoutParams)//传入AgentWeb 的父控件
     .useDefaultIndicator(indicatorColor, 2)// 使用默认进度条
     .setWebView(webView)
-//        .setWebViewClient(webViewClient)
+        .setWebViewClient(webViewClient)
 //        .setWebChromeClient(webChromeClient)
 //        .setMainFrameErrorView(R.layout.agentweb_error_page, -1)
     .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)

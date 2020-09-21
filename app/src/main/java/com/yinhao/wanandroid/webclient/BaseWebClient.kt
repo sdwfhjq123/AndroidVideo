@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
  * @date 2019/11/24
  * @desc BaseWebClient
  */
-open class BaseWebClient : WebViewClient() {
+open class BaseWebClient : com.just.agentweb.WebViewClient() {
 
     protected val TAG = "BaseWebClient"
 

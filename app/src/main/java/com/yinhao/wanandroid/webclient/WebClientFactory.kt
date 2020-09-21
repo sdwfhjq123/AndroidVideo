@@ -11,7 +11,7 @@ object WebClientFactory {
 
     val JIAN_SHU = "https://www.jianshu.com"
 
-    fun create(url: String): WebViewClient {
+    fun create(url: String): BaseWebClient {
         return when {
             url.startsWith(JIAN_SHU) -> JianShuWebClient()
             else -> BaseWebClient()

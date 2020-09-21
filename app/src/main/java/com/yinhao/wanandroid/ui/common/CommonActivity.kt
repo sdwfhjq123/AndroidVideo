@@ -9,6 +9,7 @@ import com.yinhao.wanandroid.databinding.ActivityCommonBinding
 import com.yinhao.wanandroid.ui.fragment.collection.CollectionFragment
 import com.yinhao.wanandroid.widget.ToolbarManager
 
+//TODO 点击html跳转到外部浏览器
 class CommonActivity : BaseVMActivity<CommonModel, ActivityCommonBinding>(), ToolbarManager {
     override val toolbar: Toolbar by lazy { viewBinding!!.appbar.toolbar }
 

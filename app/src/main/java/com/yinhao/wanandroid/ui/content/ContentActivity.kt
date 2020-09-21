@@ -84,7 +84,7 @@ class ContentActivity : BaseVMActivity<ContentModel, ActivityContentBinding>(), 
             layoutParams,
             webView,
             WebClientFactory.create(shareUrl),
-            mWebChromeClient,
+//            mWebChromeClient,
             mThemeColor
         )
 
