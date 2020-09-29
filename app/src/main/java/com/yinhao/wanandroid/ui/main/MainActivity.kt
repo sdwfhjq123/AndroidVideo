@@ -14,11 +14,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.App
 import com.yinhao.wanandroid.R
+import com.yinhao.wanandroid.base.BaseVMActivity
 import com.yinhao.wanandroid.databinding.ActivityMainBinding
 import com.yinhao.wanandroid.db.entity.User
 import com.yinhao.wanandroid.event.LoginEvent
@@ -26,10 +27,10 @@ import com.yinhao.wanandroid.model.bean.UserInfoBody
 import com.yinhao.wanandroid.other.ConstantValues
 import com.yinhao.wanandroid.ui.common.CommonActivity
 import com.yinhao.wanandroid.ui.fragment.home.HomeFragment
-import com.yinhao.wanandroid.ui.fragment.system.SystemFragment
-import com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment
 import com.yinhao.wanandroid.ui.fragment.project.ProjectFragment
 import com.yinhao.wanandroid.ui.fragment.square.SquareFragment
+import com.yinhao.wanandroid.ui.fragment.system.SystemFragment
+import com.yinhao.wanandroid.ui.fragment.wechat.WechatFragment
 import com.yinhao.wanandroid.ui.login.LoginActivity
 import com.yinhao.wanandroid.ui.score.ScoreActivity
 import com.yinhao.wanandroid.ui.setting.SettingsActivity
@@ -185,6 +186,15 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initFragment() {
         viewBinding?.bottomNavView?.setOnNavigationItemSelectedListener(onNavigationItemSelected)
+        //badgeView https://blog.csdn.net/yechaoa/article/details/103977127
+        //https://juejin.im/post/6867895624025997320
+
+        val badge = viewBinding?.bottomNavView?.getOrCreateBadge(R.id.nav_home)
+        badge?.badgeGravity= BadgeDrawable.TOP_END
+        badge?.isVisible = true
+        // An icon only badge will be displayed unless a number is set:
+        badge?.number = 99
+
     }
 
     private fun initToolbar() {

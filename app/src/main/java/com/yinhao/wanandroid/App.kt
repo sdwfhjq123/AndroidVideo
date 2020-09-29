@@ -53,7 +53,7 @@ class App : Application() {
         super.onCreate()
         instance = this
         Utils.init(this)
-        initLiveEventBus()
+//        initLiveEventBus()
 
         MultiDex.install(this)
 

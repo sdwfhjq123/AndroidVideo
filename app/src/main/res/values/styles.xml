@@ -1,6 +1,7 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight">
+<!--    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight">-->
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight">
         <!-- 状态栏和标题栏颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
